@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Plan : My Night</title>
+</head>
+<body>
+	<h1>
+		Plan for <span th:text="${baseLocation}" />
+	</h1>
+	<!-- List of Events -->
+	<div>
+		<div th:each="event : ${events}">
+			<div>
+				Title: <span th:text="${event.title}"></span>
+			</div>
+			<div>
+				Description: <span th:utext="${event.description}"></span>
+			</div>
+			<div>
+				<a href="#" th:href="${event.url}">More Details</a>
+			</div>
+		</div>
+	</div>
+	<!-- List of Restaurants -->
+	<div>
+		<div th:each="rest : ${restaurants}">
+			<div th:text="${rest.name}"></div>
+			<div th:text="${rest.rating}"></div>
+			<div th:text="${rest.is_closed}"></div>
+			<div th:text="${rest.display_phone}"></div>
+			<div th:each="line : ${rest.display_location}">
+				<div th:text="${line}"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Google Map -->
+
+</body>
+</html>
