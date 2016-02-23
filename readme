@@ -1,0 +1,32 @@
+Welcome to My Night!!
+Your friendly evening planner.
+
+Before we can plan an amazing evening, we need to get 
+up and running.
+
+This application is a web application that will need 
+a web server to run on.  For instance Tomcat 8 is the
+web-server that it was developed on.  Although any 
+recent web-server should work.  For the sake of
+deployment we are going to focus on Tomcat 8.
+
+For easy of packaging and project development maven
+was used.  Therefore to create the assign1.war file
+the following command can be run in the base
+directory:
+
+mvn clean install
+
+From there the assign1.war file will be located in
+the target directory.  The file will need to make
+its way to the into the webapps directory on the 
+Tomcat 8 web-server.  When starting up the server
+the file will be expanded into a runnable state.
+Now there are many ways to add a war file to a 
+Tomcat server the above is just one way.
+
+Once the server is up and running, the application
+can likely be accessed at the following address:
+
+http://localhost:8080/assign1
+
