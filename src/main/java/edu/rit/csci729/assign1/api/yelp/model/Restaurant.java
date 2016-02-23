@@ -1,5 +1,11 @@
 package edu.rit.csci729.assign1.api.yelp.model;
 
+/**
+ * A POJO to hold restaurant data.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class Restaurant {
 
 	private String name, display_phone;

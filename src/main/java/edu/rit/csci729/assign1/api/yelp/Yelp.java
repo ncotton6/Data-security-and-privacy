@@ -18,10 +18,22 @@ import com.google.gson.JsonParser;
 
 import edu.rit.csci729.assign1.api.yelp.model.Restaurant;
 
+/**
+ * Utilizes the Yelp API to get resturants near a location.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class Yelp {
 
 	private static final String endpoint = "https://api.yelp.com/v2/search";
 
+	/**
+	 * Retrieves restaurants near a particular location.
+	 * 
+	 * @param location
+	 * @return
+	 */
 	public static List<Restaurant> getRestaurants(String location) {
 		List<Restaurant> restaurants = new ArrayList<Restaurant>();
 		JsonArray businesses = yelpAPICall(location);
@@ -47,6 +59,13 @@ public class Yelp {
 		return restaurants;
 	}
 
+	/**
+	 * Retrieves the restaurants from the Yelp API, but have not yet been
+	 * converted into Restaurant objects.
+	 * 
+	 * @param location
+	 * @return
+	 */
 	private static JsonArray yelpAPICall(String location) {
 		OAuthService service = new ServiceBuilder().provider(YelpAuth.class).apiKey("6Hj9Uacs53ZNvtOhiBPSfg")
 				.apiSecret("U5Zg-n0fircpKZtYTNpUgbjHzlk").build();

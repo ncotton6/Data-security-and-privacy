@@ -12,10 +12,17 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+/**
+ * This class sets a great deal of the configurations in order for spring 4
+ * annotations to work.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "edu.rit.csci729.assign1")
-public class MyNightConfiguration extends WebMvcConfigurerAdapter{
+public class MyNightConfiguration extends WebMvcConfigurerAdapter {
 
 	@Bean(name = "templateResolver")
 	public ServletContextTemplateResolver getTemplateResolver() {
@@ -48,9 +55,9 @@ public class MyNightConfiguration extends WebMvcConfigurerAdapter{
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
-	
-	 @Override  
-     public void addResourceHandlers(ResourceHandlerRegistry registry) {  
-             registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");  
-     }  
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
 }

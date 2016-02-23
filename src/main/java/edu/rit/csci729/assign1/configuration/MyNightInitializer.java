@@ -8,6 +8,12 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+/**
+ * This is utilized by the web-server to initialize the app.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class MyNightInitializer implements WebApplicationInitializer{
 
 	public void onStartup(ServletContext container) throws ServletException {

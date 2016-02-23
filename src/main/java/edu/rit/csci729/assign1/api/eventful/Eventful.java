@@ -12,10 +12,22 @@ import org.jdom2.input.SAXBuilder;
 
 import edu.rit.csci729.assign1.api.eventful.model.Event;
 
+/**
+ * Utilizes the Eventful Rest API, to get a list of events in a particular area.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class Eventful {
 
 	private static final String endpoint = "http://api.eventful.com/rest/events/search?app_key=%s&location=%s&date=Today";
 
+	/**
+	 * Retrieves a list of events in a particular location.
+	 * 
+	 * @param location
+	 * @return
+	 */
 	public static List<Event> getEvents(String location) {
 		List<Event> events = new ArrayList<Event>();
 		try {
@@ -44,6 +56,15 @@ public class Eventful {
 		return events;
 	}
 
+	/**
+	 * Retrieves the events from the eventful API, but have not yet been turned into event objects.
+	 * 
+	 * @param location
+	 * @param apiKey
+	 * @return
+	 * @throws IOException
+	 * @throws JDOMException
+	 */
 	private static List<Element> eventfulAPIRequest(String location, String apiKey) throws IOException, JDOMException {
 		URL url = new URL(String.format(endpoint, apiKey, location));
 		SAXBuilder builder = new SAXBuilder();

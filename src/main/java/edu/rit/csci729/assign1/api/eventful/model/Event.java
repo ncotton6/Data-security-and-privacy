@@ -1,5 +1,11 @@
 package edu.rit.csci729.assign1.api.eventful.model;
 
+/**
+ * A POJO to hold event data.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class Event {
 
 	private String url, title, description, start_time, stop_time, venue_address, city_name, region_name, postal_code,
