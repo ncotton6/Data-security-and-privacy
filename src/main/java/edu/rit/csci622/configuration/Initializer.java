@@ -1,4 +1,4 @@
-package edu.rit.csci729.assign1.configuration;
+package edu.rit.csci622.configuration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,11 +14,11 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @author Nathaniel Cotton
  *
  */
-public class MyNightInitializer implements WebApplicationInitializer{
+public class Initializer implements WebApplicationInitializer{
 
 	public void onStartup(ServletContext container) throws ServletException {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(MyNightConfiguration.class);
+		ctx.register(Configuration.class);
 		ctx.setServletContext(container);
 		ServletRegistration.Dynamic servlet = container.addServlet(
 				"dispatcher", new DispatcherServlet(ctx));

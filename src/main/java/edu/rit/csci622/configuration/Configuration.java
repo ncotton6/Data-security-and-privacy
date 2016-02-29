@@ -1,9 +1,8 @@
-package edu.rit.csci729.assign1.configuration;
+package edu.rit.csci622.configuration;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,10 +18,10 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
  * @author Nathaniel Cotton
  *
  */
-@Configuration
+@org.springframework.context.annotation.Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "edu.rit.csci729.assign1")
-public class MyNightConfiguration extends WebMvcConfigurerAdapter {
+@ComponentScan(basePackages = "edu.rit.csci622")
+public class Configuration extends WebMvcConfigurerAdapter {
 
 	@Bean(name = "templateResolver")
 	public ServletContextTemplateResolver getTemplateResolver() {
