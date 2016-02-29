@@ -4,10 +4,10 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>edu.rit.csci729</groupId>
-	<artifactId>assign1</artifactId>
+	<artifactId>webproj</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-	<name>Assign1</name>
+	<name>webproj</name>
 
 	<properties>
 		<springframework.version>4.0.6.RELEASE</springframework.version>
@@ -65,13 +65,13 @@
 					<version>2.4</version>
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>assign1</warName>
+						<warName>webproj</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<finalName>assign1</finalName>
+		<finalName>webproj</finalName>
 	</build>
 
 </project>
