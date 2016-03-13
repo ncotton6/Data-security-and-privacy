@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.rit.csci622.data.dao.mapper.mapper">
+
+	<resultMap type="User" id="User">
+		<result property="idUser" column="idUser"/>
+		<result property="username" column="username"/>
+		<result property="first_name" column="first_name"/>
+		<result property="last_name" column="last_name"/>
+		<result property="email" column="email"/>
+		<result property="password" column="password"/>
+		<result property="role" column="role"/>
+		<result property="joinedOn" column="joinedOn"/>
+	</resultMap>
+
+  <select id="createUser" parameterType="map" resultType="int">
+    {call createUser(
+    	#{user.username},
+    	#{user.first_name},
+    	#{user.last_name},
+    	#{user.email},
+    	#{user.password},
+    	#{key}
+    )}
+  </select>
+  
+  <select id="getUser" parameterType="map" resultType="User">
+    {call getUser(#{userId},#{key})}
+  </select>
+  
+</mapper>
