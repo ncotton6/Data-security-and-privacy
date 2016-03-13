@@ -39,7 +39,7 @@ public class IndexController {
 		u.setLast_name("Cotton");
 		u.setPassword("test");
 		u.setUsername("ncotton6");
-		d.createUser(u);
+		d.createUser(u,"test");
 		
 		return "index";
 	}

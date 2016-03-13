@@ -27,10 +27,7 @@ public class DaoImpl implements Dao {
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			Map<String,Object> params = new HashMap<String,Object>();
-			params.put("key", key);
-			params.put("user", user);
-			int id = session.selectOne(namespace+".createUser",params);
+			int id = session.getMapper(Dao.class).createUser(user, key);
 			session.commit();
 			return id;
 		}finally{
@@ -42,7 +39,7 @@ public class DaoImpl implements Dao {
 	public User getUser(int userId, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			User user = session.selectOne(namespace+".getUser",userId);
+			User user = session.getMapper(Dao.class).getUser(userId, key);
 			session.commit();
 			return user;
 		}finally{
