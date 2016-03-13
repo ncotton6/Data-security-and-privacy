@@ -15,19 +15,21 @@
 		<result property="joinedOn" column="joinedOn"/>
 	</resultMap>
 
-  <select id="createUser" parameterType="map" resultType="int">
+  <select id="createUser" resultType="int" statementType="CALLABLE">
     {call createUser(
-    	#{user.username},
-    	#{user.first_name},
-    	#{user.last_name},
-    	#{user.email},
-    	#{user.password},
-    	#{key}
+    	#{user.username,jdbcType=BLOB,mode=IN},
+    	#{user.first_name,jdbcType=BLOB,mode=IN},
+    	#{user.last_name,jdbcType=BLOB,mode=IN},
+    	#{user.email,jdbcType=BLOB,mode=IN},
+    	#{user.password,jdbcType=BLOB,mode=IN},
+    	#{key,jdbcType=BLOB,mode=IN}
     )}
   </select>
   
-  <select id="getUser" parameterType="map" resultType="User">
-    {call getUser(#{userId},#{key})}
+  <select id="getUser" resultType="User">
+    {call getUser(${userId},${key})}
   </select>
+  
+  
   
 </mapper>

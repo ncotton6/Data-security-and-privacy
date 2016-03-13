@@ -34,11 +34,12 @@ public class IndexController {
 		// TESTING
 		Dao d = new DaoImpl();
 		User u = new User();
-		u.setEmail("ncotton6@gmail.com");
+		u.setEmail("ncotton6gmail.com");
 		u.setFirst_name("Nate");
 		u.setLast_name("Cotton");
 		u.setPassword("test");
 		u.setUsername("ncotton6");
+		System.out.println(u);
 		d.createUser(u,"test");
 		
 		return "index";

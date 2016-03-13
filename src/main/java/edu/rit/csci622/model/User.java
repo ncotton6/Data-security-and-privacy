@@ -53,5 +53,11 @@ public class User {
 	public void setJoinedOn(String joinedOn) {
 		this.joinedOn = joinedOn;
 	}
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", role=" + role + ", username=" + username + ", first_name=" + first_name
+				+ ", last_name=" + last_name + ", email=" + email + ", password=" + password + ", joinedOn=" + joinedOn
+				+ "]";
+	}
 	
 }

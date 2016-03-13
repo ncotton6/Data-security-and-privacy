@@ -15,7 +15,6 @@ import edu.rit.csci622.model.User;
 public class DaoImpl implements Dao {
 
 	private String resource = "edu/rit/csci622/data/dao/mybatis_config.xml";
-	private String namespace ="edu.rit.csci622.data.dao.mapper.mapper";
 	private SqlSessionFactory factory;
 	
 	public DaoImpl() throws IOException{
