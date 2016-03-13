@@ -18,12 +18,14 @@ public class User {
 		this.role = role;
 	}
 	public String getUsername() {
+		System.out.println("GETTING USERNAME ["+username+"]");
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
 	public String getFirst_name() {
+		System.out.println("GETTING FIRST NAME ["+first_name+"]");
 		return first_name;
 	}
 	public void setFirst_name(String first_name) {

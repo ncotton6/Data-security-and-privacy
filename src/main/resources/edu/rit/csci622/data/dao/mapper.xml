@@ -17,12 +17,12 @@
 
   <select id="createUser" resultType="int" statementType="CALLABLE">
     {call createUser(
-    	#{user.username,jdbcType=BLOB,mode=IN},
-    	#{user.first_name,jdbcType=BLOB,mode=IN},
-    	#{user.last_name,jdbcType=BLOB,mode=IN},
-    	#{user.email,jdbcType=BLOB,mode=IN},
-    	#{user.password,jdbcType=BLOB,mode=IN},
-    	#{key,jdbcType=BLOB,mode=IN}
+    	#{user.username},
+    	#{user.first_name},
+    	#{user.last_name},
+    	#{user.email},
+    	#{user.password},
+    	#{key}
     )}
   </select>
   
