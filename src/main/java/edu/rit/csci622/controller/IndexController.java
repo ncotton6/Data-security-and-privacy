@@ -7,8 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import edu.rit.csci622.data.dao.Dao;
-import edu.rit.csci622.data.dao.DaoImpl;
+import edu.rit.csci622.data.dao.CustomerDao;
+import edu.rit.csci622.data.dao.impl.CustomerDaoImpl;
 import edu.rit.csci622.model.User;
 
 /**
@@ -32,7 +32,7 @@ public class IndexController {
 	public String index(ModelMap model) throws IOException {
 		
 		// TESTING
-		Dao d = new DaoImpl();
+		CustomerDao d = new CustomerDaoImpl();
 		User u = new User();
 		u.setEmail("ncotton6gmail.com");
 		u.setFirst_name("Nate");
@@ -40,7 +40,10 @@ public class IndexController {
 		u.setPassword("test");
 		u.setUsername("ncotton6");
 		System.out.println(u);
-		d.createUser(u,"test");
+		int id = d.createUser(u,"test");
+		System.out.println("User ID is :: " + id);
+		User u2 = d.getUser(id, "test");
+		System.out.println(u2);
 		
 		return "index";
 	}
