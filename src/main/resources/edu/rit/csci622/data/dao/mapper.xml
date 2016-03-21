@@ -22,8 +22,7 @@
     	#{user.last_name},
     	#{user.email},
     	#{user.password},
-    	#{key}
-    )}
+    	#{key})}
   </select>
   
   <select id="getUser" resultType="User">
