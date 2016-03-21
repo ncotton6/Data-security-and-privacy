@@ -5,30 +5,65 @@
 <mapper namespace="edu.rit.csci622.data.dao.CustomerDao">
 
 	<resultMap type="User" id="User">
-		<result property="idUser" column="idUser"/>
-		<result property="username" column="username"/>
-		<result property="first_name" column="first_name"/>
-		<result property="last_name" column="last_name"/>
-		<result property="email" column="email"/>
-		<result property="password" column="password"/>
-		<result property="role" column="role"/>
-		<result property="joinedOn" column="joinedOn"/>
+		<result property="idUser" column="idUser" />
+		<result property="username" column="username" />
+		<result property="first_name" column="first_name" />
+		<result property="last_name" column="last_name" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="role" column="role" />
+		<result property="joinedOn" column="joinedOn" />
 	</resultMap>
 
-  <select id="createUser" resultType="int" statementType="CALLABLE">
-    {call createUser(
-    	#{user.username},
-    	#{user.first_name},
-    	#{user.last_name},
-    	#{user.email},
-    	#{user.password},
-    	#{key})}
-  </select>
-  
-  <select id="getUser" resultType="User">
-    {call getUser(#{userId},#{key})}
-  </select>
-  
-  
-  
+	<resultMap type="Product" id="Product">
+		<result property="idProduct" column="idproduct"/>
+		<result property="name" column="name"/>
+		<result property="description" column="description"/>
+		<result property="active" column="active"/>
+	</resultMap>
+
+	<select id="createUser" resultType="int" statementType="CALLABLE">
+		{call createUser(
+		#{user.username},
+		#{user.first_name},
+		#{user.last_name},
+		#{user.email},
+		#{user.password},
+		#{key})}
+	</select>
+
+	<select id="getUser" resultType="User" statementType="CALLABLE">
+		{call getUser(#{userId},#{key})}
+	</select>
+
+	<select id="createSession" statementType="CALLABLE">
+		{call createSession(#{uuid},#{userId},#{key})}
+	</select>
+
+	<select id="getProduct" resultType="Product" statementType="CALLABLE">
+		{call getProduct(#{productId},#{key})}
+	</select>
+
+	<select id="placeOrder" resultType="int" statementType="CALLABLE">
+		{call placeOrder(#{productId},#{qty},#{userId},#{key})}
+	</select>
+	
+	<select id="getProducts" resultType="Product" statementType="CALLABLE">
+		{call getProducts(#{key})}
+	</select>
+	
+	<select id="requestHire" resultType="int" statementType="CALLABLE">
+		{call requestHire(#{userId},#{roleId})}
+	</select>
+
+	<select id="deleteSession" statementType="CALLABLE">
+		{call deleteSession(#{sessionId})}
+	</select>
+	
+	<select id="getUserPassword" resultType="Map" statementType="CALLABLE">
+		{call getUserPassword(#{username},#{key})}
+	</select>
+
+
+
 </mapper>
