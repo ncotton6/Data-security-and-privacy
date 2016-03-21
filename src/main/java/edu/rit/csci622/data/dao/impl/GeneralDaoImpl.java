@@ -11,16 +11,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import edu.rit.csci622.data.dao.CustomerDao;
+import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
-public class CustomerDaoImpl implements CustomerDao {
+public class GeneralDaoImpl implements GeneralDao {
 
-	private String resource = "edu/rit/csci622/data/dao/mybatis_config.xml";
+	private final String resource = "edu/rit/csci622/data/dao/GeneralConfig.xml";
 	private SqlSessionFactory factory;
 	
-	public CustomerDaoImpl() throws IOException{
+	public GeneralDaoImpl() throws IOException{
 		InputStream is = Resources.getResourceAsStream(resource);
 		this.factory = new SqlSessionFactoryBuilder().build(is);
 		is.close();
@@ -29,7 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			int id = session.getMapper(CustomerDao.class).createUser(user, key);
+			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
 		}finally{
@@ -41,7 +41,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public User getUser(int userId, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			User user = session.getMapper(CustomerDao.class).getUser(userId, key);
+			User user = session.getMapper(GeneralDao.class).getUser(userId, key);
 			session.commit();
 			return user;
 		}finally{
@@ -53,7 +53,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public void createSession(String uuid, int userId, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			session.getMapper(CustomerDao.class).createSession(uuid, userId, key);
+			session.getMapper(GeneralDao.class).createSession(uuid, userId, key);
 			session.commit();
 		}finally{
 			if(session != null)
@@ -64,7 +64,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Product> getProduct(int productId, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			List<Product> products = session.getMapper(CustomerDao.class).getProduct(productId, key);
+			List<Product> products = session.getMapper(GeneralDao.class).getProduct(productId, key);
 			session.commit();
 			return products;
 		}finally{
@@ -76,7 +76,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int placeOrder(int productId, int quantity, int userId, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			int orderId = session.getMapper(CustomerDao.class).placeOrder(productId, quantity, userId, key);
+			int orderId = session.getMapper(GeneralDao.class).placeOrder(productId, quantity, userId, key);
 			session.commit();
 			return orderId;
 		}finally{
@@ -88,7 +88,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Product> getProducts(String key) {
 		SqlSession session = factory.openSession();
 		try{
-			List<Product> products = session.getMapper(CustomerDao.class).getProducts(key);
+			List<Product> products = session.getMapper(GeneralDao.class).getProducts(key);
 			session.commit();
 			return products;
 		}finally{
@@ -100,7 +100,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int requestHire(int userId, int roleId) {
 		SqlSession session = factory.openSession();
 		try{
-			int requestId = session.getMapper(CustomerDao.class).requestHire(userId, roleId);
+			int requestId = session.getMapper(GeneralDao.class).requestHire(userId, roleId);
 			session.commit();
 			return requestId;
 		}finally{
@@ -112,7 +112,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public void deleteSession(int sessionId) {
 		SqlSession session = factory.openSession();
 		try{
-			session.getMapper(CustomerDao.class).deleteSession(sessionId);;
+			session.getMapper(GeneralDao.class).deleteSession(sessionId);;
 			session.commit();
 		}finally{
 			if(session != null)
@@ -123,7 +123,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public Map<String, String> getUserPassword(String username, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			Map<String,String> map = session.getMapper(CustomerDao.class).getUserPassword(username, key);
+			Map<String,String> map = session.getMapper(GeneralDao.class).getUserPassword(username, key);
 			session.commit();
 			return map;
 		}finally{

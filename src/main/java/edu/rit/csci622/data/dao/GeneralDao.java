@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
-public interface CustomerDao {
+public interface GeneralDao {
 
 	public int createUser(@Param("user") User user, @Param("key") String key);
 

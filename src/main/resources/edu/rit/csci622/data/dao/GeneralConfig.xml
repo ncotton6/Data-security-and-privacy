@@ -6,7 +6,9 @@
 
 	<typeAliases>
 		<typeAlias alias="User" type="edu.rit.csci622.model.User"/>
+		<typeAlias alias="Product" type="edu.rit.csci622.model.Product"/>
 	</typeAliases>
+	
 
 	<environments default="development">
 		<environment id="development">
@@ -20,6 +22,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="edu/rit/csci622/data/dao/mapper.xml" />
+		<mapper resource="edu/rit/csci622/data/dao/GeneralMapper.xml" />
 	</mappers>
 </configuration>

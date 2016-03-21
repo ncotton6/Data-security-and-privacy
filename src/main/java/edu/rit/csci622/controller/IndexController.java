@@ -7,8 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import edu.rit.csci622.data.dao.CustomerDao;
-import edu.rit.csci622.data.dao.impl.CustomerDaoImpl;
+import edu.rit.csci622.data.dao.GeneralDao;
+import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.User;
 
 /**
@@ -32,7 +32,7 @@ public class IndexController {
 	public String index(ModelMap model) throws IOException {
 		
 		// TESTING
-		CustomerDao d = new CustomerDaoImpl();
+		GeneralDao d = new GeneralDaoImpl();
 		User u = new User();
 		u.setEmail("ncotton6gmail.com");
 		u.setFirst_name("Nate");
