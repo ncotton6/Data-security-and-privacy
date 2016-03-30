@@ -2,11 +2,12 @@ package edu.rit.csci622.data.dao.impl;
 
 import java.util.List;
 
+import edu.rit.csci622.data.dao.Dao;
 import edu.rit.csci622.data.dao.EmployeeHandlerDao;
 import edu.rit.csci622.data.dao.ProductHandlerDao;
 import edu.rit.csci622.model.Hire;
 
-public class ManagerDaoImpl implements ProductHandlerDao, EmployeeHandlerDao{
+public class ManagerDaoImpl extends Dao implements ProductHandlerDao, EmployeeHandlerDao{
 
 	public void fireEmployee(int userId) {
 		// TODO Auto-generated method stub

@@ -10,12 +10,15 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.jasypt.util.text.StrongTextEncryptor;
 
+import edu.rit.csci622.data.PasswordHandler;
+import edu.rit.csci622.data.dao.Dao;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
-public class GeneralDaoImpl implements GeneralDao {
+public class GeneralDaoImpl extends Dao implements GeneralDao {
 
 	private final String resource = "edu/rit/csci622/data/dao/GeneralConfig.xml";
 	private SqlSessionFactory factory;
@@ -24,11 +27,13 @@ public class GeneralDaoImpl implements GeneralDao {
 		InputStream is = Resources.getResourceAsStream(resource);
 		this.factory = new SqlSessionFactoryBuilder().build(is);
 		is.close();
+		this.encryptor.setPassword(PasswordHandler.getAppPassword());
 	}
 
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
 		try{
+			User encryptedUser = (User)encrypt(User.class, user);			
 			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
@@ -42,6 +47,7 @@ public class GeneralDaoImpl implements GeneralDao {
 		SqlSession session = factory.openSession();
 		try{
 			User user = session.getMapper(GeneralDao.class).getUser(userId, key);
+			user = (User)decrypt(User.class, user);
 			session.commit();
 			return user;
 		}finally{
