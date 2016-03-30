@@ -19,14 +19,24 @@ public class Dao {
 			Object ret = clazz.newInstance();
 			Method[] methods = clazz.getMethods();
 			for (Method m : methods) {
-				if (m.getName().startsWith("get")) {
-					String setMethodName = "set" + m.getName().substring(3);
-					Method set = clazz.getMethod(setMethodName, m.getReturnType());
-					Object value = m.invoke(obj, null);
-					if (value instanceof String) {
-						String strValue = (String) value;
-						set.invoke(ret, encryptor.encrypt(strValue));
+				try {
+					if (m.getName().startsWith("get")) {
+						String setMethodName = "set" + m.getName().substring(3);
+						Method set = clazz.getMethod(setMethodName, m.getReturnType());
+						Object value = m.invoke(obj, null);
+						System.out.println(value.getClass() + " --- " + (value instanceof String));
+						if (value instanceof String) {
+							System.out.println("It works!!!!!!");
+							String strValue = (String) value;
+							String encrypted = encryptor.encrypt(strValue);
+							System.out.println(
+									m.getName() + " == (" + value + ") ==> " + set.getName() + " [" + encrypted + "]");
+							set.invoke(ret, encrypted);
+						}
 					}
+				} catch (Throwable e) {
+					System.out.println("///////////////////////");
+					e.printStackTrace();
 				}
 			}
 			return ret;
@@ -41,23 +51,29 @@ public class Dao {
 			Object ret = clazz.newInstance();
 			Method[] methods = clazz.getMethods();
 			for (Method m : methods) {
-				try{
-				if (m.getName().startsWith("get")) {
-					String setMethodName = "set" + m.getName().substring(3);
-					Method set = clazz.getMethod(setMethodName, m.getReturnType());
-					Object value = m.invoke(obj, null);
-					if (value instanceof String) {
-						String strValue = (String) value;
-						set.invoke(ret, encryptor.decrypt(strValue));
+				try {
+					if (m.getName().startsWith("get")) {
+						String setMethodName = "set" + m.getName().substring(3);
+						Method set = clazz.getMethod(setMethodName, m.getReturnType());
+						Object value = m.invoke(obj, null);
+						System.out.println(value.getClass() + " --- " + (value instanceof String));
+						if (value instanceof String) {
+							System.out.println("It works!!!!!!");
+							String strValue = (String) value;
+							String encrypted = encryptor.decrypt(strValue);
+							System.out.println(
+									m.getName() + " == (" + value + ") ==> " + set.getName() + " [" + encrypted + "]");
+							set.invoke(ret, encrypted);
+						}
 					}
-				}
-				}catch(Exception e){
-					
+				} catch (Throwable e) {
+					System.out.println("++++++++++++++++++++++++++++++");
+					e.printStackTrace();
 				}
 			}
 			return ret;
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return null;
 	}

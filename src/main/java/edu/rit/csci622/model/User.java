@@ -65,6 +65,11 @@ public class User {
 		}
 	}
 	
+	public void setJoinedOnAsDate(Date d){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		setJoinedOn(sdf.format(d));		
+	}
+	
 	public void setJoinedOn(String joinedOn) {
 		this.joinedOn = joinedOn;
 	}

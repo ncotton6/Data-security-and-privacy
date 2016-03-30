@@ -2,6 +2,7 @@ package edu.rit.csci622.controller;
 
 import java.io.IOException;
 
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
