@@ -33,7 +33,16 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			User encryptedUser = (User)encrypt(User.class, user);			
+			System.out.println("=======================");
+			System.out.println(user);
+			System.out.println("=======================");
+			User encryptedUser = (User)encrypt(User.class, user);
+			System.out.println("=======================");
+			System.out.println(encryptedUser);
+			System.out.println("=======================");
+			System.out.println("=======================");
+			System.out.println(decrypt(User.class, encryptedUser));
+			System.out.println("=======================");
 			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
