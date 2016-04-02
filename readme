@@ -1,1 +1,11 @@
+Install Tomcat 8, or any other recent version of tomcat should work as well.
+
+Install MySql, a recent version is preferable
+
+Install Maven
+
+Execute in the project
+
 mvn clean install
+
+Move the war file in the target directory to the webapps directory in the tomcat directory, and in the bin directory there should be a startup executable.
