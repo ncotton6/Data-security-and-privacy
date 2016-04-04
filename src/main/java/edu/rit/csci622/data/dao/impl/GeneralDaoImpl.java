@@ -2,6 +2,7 @@ package edu.rit.csci622.data.dao.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,16 +34,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			System.out.println("=======================");
-			System.out.println(user);
-			System.out.println("=======================");
 			User encryptedUser = (User)encrypt(User.class, user);
-			System.out.println("=======================");
-			System.out.println(encryptedUser);
-			System.out.println("=======================");
-			System.out.println("=======================");
-			System.out.println(decrypt(User.class, encryptedUser));
-			System.out.println("=======================");
 			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
@@ -68,7 +60,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public void createSession(String uuid, int userId, String key) {
 		SqlSession session = factory.openSession();
 		try{
-			session.getMapper(GeneralDao.class).createSession(uuid, userId, key);
+			session.getMapper(GeneralDao.class).createSession(encrypt(uuid), userId, key);
 			session.commit();
 		}finally{
 			if(session != null)
@@ -78,10 +70,14 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 
 	public List<Product> getProduct(int productId, String key) {
 		SqlSession session = factory.openSession();
-		try{
+		try{			
 			List<Product> products = session.getMapper(GeneralDao.class).getProduct(productId, key);
+			List<Product> ret = new ArrayList<Product>(products.size());
+			for(Product p : products){
+				ret.add((Product)decrypt(Product.class, p));
+			}
 			session.commit();
-			return products;
+			return ret;
 		}finally{
 			if(session != null)
 				session.close();
@@ -104,8 +100,11 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		SqlSession session = factory.openSession();
 		try{
 			List<Product> products = session.getMapper(GeneralDao.class).getProducts(key);
-			session.commit();
-			return products;
+			List<Product> ret = new ArrayList<Product>(products.size());
+			for(Product p : products){
+				ret.add((Product)decrypt(Product.class, p));
+			}
+			return ret;
 		}finally{
 			if(session != null)
 				session.close();

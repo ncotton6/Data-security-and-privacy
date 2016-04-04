@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="User" type="edu.rit.csci622.model.User"/>
+		<typeAlias alias="Product" type="edu.rit.csci622.model.Product"/>
+		<typeAlias alias="Hire" type="edu.rit.csci622.model.Hire"/>
+		<typeAlias alias="Order" type="edu.rit.csci622.model.Order"/>
+		<typeAlias alias="Price" type="edu.rit.csci622.model.Price"/>
+		<typeAlias alias="Role" type="edu.rit.csci622.model.Role"/>
+		<typeAlias alias="Session" type="edu.rit.csci622.model.Session"/>
+	</typeAliases>
+	
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost:3306/mydb?noAccessToProcedureBodies=true&amp;useSSL=false" /> <!--  -->
+				<property name="username" value="employee" />
+				<property name="password" value="employee" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="edu/rit/csci622/data/dao/GeneralMapper.xml" />
+		<mapper resource="edu/rit/csci622/data/dao/OrderHandlerMapper.xml" />
+	</mappers>
+</configuration>

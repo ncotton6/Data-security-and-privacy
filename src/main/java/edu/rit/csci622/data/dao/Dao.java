@@ -14,6 +14,15 @@ public class Dao {
 		this.encryptor.setPassword(PasswordHandler.getAppPassword());
 	}
 
+	
+	public String encrypt(String original){
+		return this.encryptor.encrypt(original);
+	}
+	
+	public String decrypt(String encrypted){
+		return this.encryptor.decrypt(encrypted);
+	}
+	
 	public Object encrypt(Class<?> clazz, Object obj) {
 		/*try {
 			Object ret = clazz.newInstance();
