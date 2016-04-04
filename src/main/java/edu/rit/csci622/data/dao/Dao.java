@@ -15,7 +15,7 @@ public class Dao {
 	}
 
 	public Object encrypt(Class<?> clazz, Object obj) {
-		try {
+		/*try {
 			Object ret = clazz.newInstance();
 			Method[] methods = clazz.getMethods();
 			for (Method m : methods) {
@@ -43,11 +43,12 @@ public class Dao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return null;*/
+		return obj;
 	}
 
 	public Object decrypt(Class<?> clazz, Object obj) {
-		try {
+		/*try {
 			Object ret = clazz.newInstance();
 			Method[] methods = clazz.getMethods();
 			for (Method m : methods) {
@@ -75,7 +76,8 @@ public class Dao {
 		} catch (Exception e) {
 			// e.printStackTrace();
 		}
-		return null;
+		return null;*/
+		return obj;
 	}
 
 }
