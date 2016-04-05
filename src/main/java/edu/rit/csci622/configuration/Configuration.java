@@ -1,5 +1,7 @@
 package edu.rit.csci622.configuration;
 
+import java.io.IOException;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -66,6 +68,11 @@ public class Configuration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry){
-		registry.addInterceptor(new LoginInterceptor());
+		try {
+			registry.addInterceptor(new LoginInterceptor());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
