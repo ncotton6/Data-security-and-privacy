@@ -3,10 +3,23 @@
 <head>
 <meta charset="ISO-8859-1" />
 <title>Login | eCommerce</title>
-<link rel="stylesheet" type="text/css" th:href="@{resources/css/main.css}"></link>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/main.css}"></link>
 </head>
 <body>
-	<h1>Login</h1>
-<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+	<div>
+		<h1>Login</h1>
+		<form action="#" th:action="@{/login}" method="post">
+			<input type="text" name="username"/>
+			<input type="text" name="password"/>
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	<div>
+		<h1>Sign Up</h1>
+	</div>
+
+
+	<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
 </body>
 </html>
