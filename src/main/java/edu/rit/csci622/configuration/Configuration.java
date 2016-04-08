@@ -14,6 +14,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import edu.rit.csci622.interceptor.AuditInterceptor;
 import edu.rit.csci622.interceptor.LoginInterceptor;
 
 /**
@@ -68,11 +69,12 @@ public class Configuration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry){
-		/*try {
+		try {
+			registry.addInterceptor(new AuditInterceptor());
 			registry.addInterceptor(new LoginInterceptor());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 }

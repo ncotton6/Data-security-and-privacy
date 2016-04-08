@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.rit.csci622.auth.Auth;
 
 @Controller
-@RequestMapping("/signin")
+@RequestMapping("/login")
 @Auth
-public class SignInController {
+public class LoginInController {
 
 	
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(){
-		return "signin";
+		return "login";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -26,7 +26,6 @@ public class SignInController {
 		Cookie c = new Cookie("ecommsession", "test");
 		c.setMaxAge(3600);
 		response.addCookie(c);
-		
 		return "index";
 	}
 	
