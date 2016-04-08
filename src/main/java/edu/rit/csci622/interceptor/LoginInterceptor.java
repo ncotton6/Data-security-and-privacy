@@ -30,6 +30,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			if ("ecommsession".equals(c.getName())) {
 				// add the cookie check
 				// if fail redirect
+				// get annotation off of the handler
 				return true;
 			}
 		}
