@@ -27,8 +27,6 @@ public class LoginInController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(String username, String password, HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		System.out.println("Username: " + username);
-		System.out.println("Password: " + password);
 		Cookie c = new Cookie("ecommsession", "test");
 		c.setMaxAge(3600);
 		response.addCookie(c);
