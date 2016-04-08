@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {
 
-   Role[] roles() default {Role.CUSTOMER};	
+   Role[] roles() default {Role.ANONYMOUS};	
 	
 }
