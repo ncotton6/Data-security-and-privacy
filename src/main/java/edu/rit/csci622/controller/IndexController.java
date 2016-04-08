@@ -8,6 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.rit.csci622.auth.Auth;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.User;
@@ -20,6 +21,7 @@ import edu.rit.csci622.model.User;
  */
 @Controller
 @RequestMapping("/")
+@Auth
 public class IndexController {
 
 	/**

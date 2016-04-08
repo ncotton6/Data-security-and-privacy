@@ -68,11 +68,11 @@ public class Configuration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry){
-		try {
+		/*try {
 			registry.addInterceptor(new LoginInterceptor());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
