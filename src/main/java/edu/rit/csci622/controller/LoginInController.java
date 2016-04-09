@@ -1,13 +1,10 @@
 package edu.rit.csci622.controller;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -35,12 +32,10 @@ public class LoginInController {
 		System.out.println("Username: " + username);
 		System.out.println("Password: " + password);
 		GeneralDao dao = new GeneralDaoImpl();
-		Map<String, String> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
-		System.out.println("User: " + user);
+		Map<String, Object> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
 		if (user != null) {
-			System.out.println("Keys: " + Arrays.toString(user.keySet().toArray()));
-			String dbPassword = user.get("password");
-			int userId = Integer.parseInt(user.get("idUser"));
+			Object dbPassword = user.get("password");
+			int userId = (Integer)user.get("idUser");
 			if (dbPassword.equals(password)) {
 				UUID uuid = UUID.randomUUID();
 				dao.createSession(uuid.toString(), userId, PasswordHandler.getDbPassword());

@@ -64,7 +64,7 @@
 		{call getUserPassword(#{username},#{key})}
 	</select>
 	
-	<select id="" resultType="Map" statementType="CALLABLE">
+	<select id="getUserFromSession" resultType="Map" statementType="CALLABLE">
 		{call getUserFromSession(#{uuid},#{key})
 	</select>
 

@@ -2,6 +2,7 @@ package edu.rit.csci622.interceptor;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -42,7 +43,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (m.getDeclaringClass() == LoginInController.class
 				|| (m.getDeclaringClass() == UserController.class && m.getName().equals("createUser")))
 			return true;
-		Auth auth = m.getDeclaringClass().getAnnotation(Auth.class);
+		Auth auth = m.getAnnotation(Auth.class);
+		auth = auth == null ? m.getDeclaringClass().getAnnotation(Auth.class) : auth;
 		if (auth != null) {
 			roles = auth.roles();
 		}
@@ -50,8 +52,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			for (Cookie c : cookies) {
 				if ("ecommsession".equals(c.getName())) {
 					GeneralDao dao = new GeneralDaoImpl();
-					Map<String, String> map = dao.getUserFromSession(c.getValue(), PasswordHandler.getDbPassword());
-					String userId = map.get("userId");
+					Map<String, Object> map = dao.getUserFromSession(c.getValue(), PasswordHandler.getDbPassword());
+					System.out.println(Arrays.toString(map.keySet().toArray()));
+					String userId = (String)map.get("userId");
 					System.out.println(userId + " --- -- - - - -");
 					// test user id
 					return true;

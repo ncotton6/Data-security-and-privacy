@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -62,7 +63,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public void createSession(String uuid, int userId, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			session.getMapper(GeneralDao.class).createSession(encrypt(uuid), userId, key);
+			session.getMapper(GeneralDao.class).createSession(uuid, userId, key);
 			session.commit();
 		} finally {
 			if (session != null)
@@ -137,10 +138,15 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		}
 	}
 
-	public Map<String, String> getUserPassword(String username, String key) {
+	public Map<String, Object> getUserPassword(String username, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			Map<String, String> map = session.getMapper(GeneralDao.class).getUserPassword(username, key);
+			System.out.println("Searching for: " + username + " with key: " + key);
+			Map<String, Object> map = session.getMapper(GeneralDao.class).getUserPassword(username, key);
+			System.out.println("Key Values");
+			System.out.println(map.get("idUser"));
+			map.put("username", new String((byte[]) map.get("username")));
+			map.put("password", new String((byte[]) map.get("password")));
 			session.commit();
 			return map;
 		} finally {
@@ -149,10 +155,10 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		}
 	}
 
-	public Map<String, String> getUserFromSession(String uuid, String key) {
+	public Map<String, Object> getUserFromSession(String uuid, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			Map<String, String> map = session.getMapper(GeneralDao.class).getUserFromSession(uuid, key);
+			Map<String, Object> map = session.getMapper(GeneralDao.class).getUserFromSession(uuid, key);
 			session.commit();
 			return map;
 		} finally {
