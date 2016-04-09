@@ -167,4 +167,15 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		}
 	}
 
+	public void updateUser(int uid, String firstName, String lastName, String email, String key) {
+		SqlSession session = factory.openSession();
+		try {
+			session.getMapper(GeneralDao.class).updateUser(uid, firstName, lastName, email, key);
+			session.commit();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 }

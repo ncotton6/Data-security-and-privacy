@@ -67,6 +67,10 @@
 	<select id="getUserFromSession" resultType="Map" statementType="CALLABLE">
 		{call getUserFromSession(#{uuid},#{key})}
 	</select>
+	
+	<select id="updateUser" statementType="CALLABLE">
+		{call updateUser(#{uid},#{first_name},#{last_name},#{email},#{key})}
+	</select>
 
 
 

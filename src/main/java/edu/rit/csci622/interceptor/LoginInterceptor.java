@@ -54,13 +54,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 					if ("ecommsession".equals(c.getName())) {
 						GeneralDao dao = new GeneralDaoImpl();
 						Map<String, Object> map = dao.getUserFromSession(c.getValue(), PasswordHandler.getDbPassword());
-						System.out.println(Arrays.toString(map.keySet().toArray()));
-						int userId = (Integer) map.get("userId");
-						User u = dao.getUser(userId, PasswordHandler.getDbPassword());
-						int roleId = u.getRole();
-						for (Role r : roles) {
-							if (r.roleId == roleId)
-								return true;
+						if (map != null) {
+							int userId = (Integer) map.get("userId");
+							User u = dao.getUser(userId, PasswordHandler.getDbPassword());
+							int roleId = u.getRole();
+							for (Role r : roles) {
+								if (r.roleId == roleId)
+									return true;
+							}
 						}
 					}
 				}

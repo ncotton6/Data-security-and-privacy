@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>User : eCommerce</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/main.css}"></link>
+</head>
+<body>
+	<div>
+		<h1>
+			User Details <span th:text="${user.username}"></span>
+		</h1>
+		<form action="#" th:action="@{/user}" th:method="POST"
+			th:object="${user}">
+			<div>
+				<input type="text" placeholder="First Name" th:field="*{first_name}" />
+			</div>
+			<div>
+				<input type="text" placeholder="Last Name" th:field="*{last_name}" />
+			</div>
+			<div>
+				<input type="text" placeholder="Email" th:field="*{email}" />
+			</div>
+			<button type="submit">Update</button>
+		</form>
+	</div>
+	<div>
+		<h1>Request Role</h1>
+		<form action="#" th:action="@{/user/role}" th:method="POST">
+			<div>
+				<input type="radio" name="roleId" value="1" /><span>Manager</span>
+			</div>
+			<div>
+				<input type="radio" name="roleId" value="2" /><span>HR</span>
+			</div>
+			<div>
+				<input type="radio" name="roleId" value="3" /><span>Employee</span>
+			</div>
+			<button type="submit">Request</button>
+		</form>
+	</div>
+	<div>
+		<h1>Change Password</h1>
+		<form action="#" th:action="@{/user/password}" th:method="POST">
+			<div>
+				<input type="password" name="password"/>
+				<button type="submit">Change Password</button>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+</body>
+</html>
