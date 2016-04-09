@@ -1,1 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.rit.csci622.data.dao.EmployeeHandlerDao">
+
+	<resultMap type="User" id="User">
+		<result property="idUser" column="idUser" />
+		<result property="username" column="username" />
+		<result property="first_name" column="first_name" />
+		<result property="last_name" column="last_name" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="role" column="role" />
+		<result property="joinedOn" column="joinedOn" />
+	</resultMap>
+
+	<resultMap type="Product" id="Product">
+		<result property="idProduct" column="idproduct"/>
+		<result property="name" column="name"/>
+		<result property="description" column="description"/>
+		<result property="active" column="active"/>
+	</resultMap>
+	
+	<resultMap type="Hire" id="Hire">
+		<result property="hrSignOff" column="hrSignOff"/>
+		<result property="idHire" column="idHire"/>
+		<result property="idUser" column="idUser"/>
+		<result property="managerSignOff" column="managerSignOff"/>
+		<result property="requestedRole" column="requestedRole"/>
+	</resultMap>
+	
+	<resultMap type="" id=""></resultMap>
+	
+	<select id="getHire" resultType="Hire" statementType="CALLABLE">
+		{call getHire()}
+	</select>
+	
+	<select id="managerHireSignOff" statementType="CALLABLE">
+		{call managerHireSignOff(#{userId},#{managerId},#{roleId})}
+	</select>
+
+</mapper>

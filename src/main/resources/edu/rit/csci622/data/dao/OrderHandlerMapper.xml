@@ -1,1 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.rit.csci622.data.dao.OrderHandlerDao">
+
+	<resultMap type="ProductOrder" id="ProductOrder">
+		<result column="fulfilled" property="fulfilled"/>
+		<result column="fulfilledBy" property="fulfilledBy"/>
+		<result column="idorder" property="idOrder"/>
+		<result column="product_id" property="productId"/>
+		<result column="qty" property="qty"/>
+	</resultMap>
+
+	<select id="fulfillOrder" statementType="CALLABLE">
+		{call fulFillOrder(#{orderId},#{fullfillerId})}
+	</select>
+	
+	<select id="getOrders" resultType="ProductOrder" statementType="CALLABLE">
+		{call getOrders()}
+	</select>
+
+
+</mapper>

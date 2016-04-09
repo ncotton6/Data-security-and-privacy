@@ -5,9 +5,11 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import edu.rit.csci622.data.dao.HREmployeeHandlerDao;
 import edu.rit.csci622.data.dao.OrderHandlerDao;
 import edu.rit.csci622.model.Order;
 
@@ -24,13 +26,26 @@ public class EmployeerDaoImpl extends GeneralDaoImpl implements OrderHandlerDao 
 	}
 
 	public void fulfillOrder(int orderId, int fulfillerId) {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = factory.openSession();
+		try{
+			session.getMapper(OrderHandlerDao.class).fulfillOrder(orderId, fulfillerId);
+			session.commit();
+		}finally{
+			if(session != null)
+				session.close();
+		}
 	}
 
 	public List<Order> getOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		try{
+			List<Order> ret = session.getMapper(OrderHandlerDao.class).getOrders();
+			session.commit();
+			return ret;
+		}finally{
+			if(session != null)
+				session.close();
+		}
 	}
 
 }
