@@ -1,1 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.rit.csci622.data.dao.ProductHandlerDao">
+
+
+	<select id="updatePrice" statementType="CALLABLE">
+		{call
+		updatePrice(#{price},#{changedBy},#{productId})}
+	</select>
+
+	<select id="createProduct" resultType="int" statementType="CALLABLE">
+		{call
+		createProduct(#{name},#{description},#{active},#{price},#{user},#{key})}
+	</select>
+
+	<select id="updateProduct" statementType="CALLABLE">
+		{call
+		updateProduct(#{productId},#{name},#{description},#{active},#{key})}
+	</select>
+
+</mapper>

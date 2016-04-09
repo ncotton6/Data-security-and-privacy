@@ -12,6 +12,7 @@
 		<typeAlias alias="Price" type="edu.rit.csci622.model.Price"/>
 		<typeAlias alias="Role" type="edu.rit.csci622.model.Role"/>
 		<typeAlias alias="Session" type="edu.rit.csci622.model.Session"/>
+		<typeAlias alias="ProductOrder" type="edu.rit.csci622.model.ProductOrder"/>
 	</typeAliases>
 	
 

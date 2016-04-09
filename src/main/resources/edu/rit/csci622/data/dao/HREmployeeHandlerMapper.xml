@@ -1,1 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.rit.csci622.data.dao.HREmployeeHandlerDao">
+
+	<resultMap type="Hire" id="Hire">
+		<result property="hrSignOff" column="hrSignOff" />
+		<result property="idHire" column="idHire" />
+		<result property="idUser" column="idUser" />
+		<result property="managerSignOff" column="managerSignOff" />
+		<result property="requestedRole" column="requestedRole" />
+	</resultMap>
+
+
+	<select id="hrHireSignOff" statementType="CALLABLE">
+		{call
+		hrHireSignOff(#{userId},#{hrId},#{roleId})}
+	</select>
+
+	<select id="getHire" resultType="Hire" statementType="CALLABLE">
+		{call getHire()}
+	</select>
+
+</mapper>
