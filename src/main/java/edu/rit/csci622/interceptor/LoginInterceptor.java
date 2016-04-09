@@ -21,6 +21,7 @@ import edu.rit.csci622.controller.UserController;
 import edu.rit.csci622.data.PasswordHandler;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
+import edu.rit.csci622.model.User;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
@@ -40,26 +41,30 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (handler instanceof HandlerMethod)
 			hm = (HandlerMethod) handler;
 		Method m = hm.getMethod();
-		if (m.getDeclaringClass() == LoginInController.class
-				|| (m.getDeclaringClass() == UserController.class && m.getName().equals("createUser")))
-			return true;
 		Auth auth = m.getAnnotation(Auth.class);
 		auth = auth == null ? m.getDeclaringClass().getAnnotation(Auth.class) : auth;
 		if (auth != null) {
 			roles = auth.roles();
-		}
-		if (cookies != null)
-			for (Cookie c : cookies) {
-				if ("ecommsession".equals(c.getName())) {
-					GeneralDao dao = new GeneralDaoImpl();
-					Map<String, Object> map = dao.getUserFromSession(c.getValue(), PasswordHandler.getDbPassword());
-					System.out.println(Arrays.toString(map.keySet().toArray()));
-					String userId = (String)map.get("userId");
-					System.out.println(userId + " --- -- - - - -");
-					// test user id
+			for (Role r : roles) {
+				if (r == Role.ANONYMOUS)
 					return true;
-				}
 			}
+			if (cookies != null)
+				for (Cookie c : cookies) {
+					if ("ecommsession".equals(c.getName())) {
+						GeneralDao dao = new GeneralDaoImpl();
+						Map<String, Object> map = dao.getUserFromSession(c.getValue(), PasswordHandler.getDbPassword());
+						System.out.println(Arrays.toString(map.keySet().toArray()));
+						int userId = (Integer) map.get("userId");
+						User u = dao.getUser(userId, PasswordHandler.getDbPassword());
+						int roleId = u.getRole();
+						for (Role r : roles) {
+							if (r.roleId == roleId)
+								return true;
+						}
+					}
+				}
+		}
 		String uri = request.getContextPath();
 		response.sendRedirect(uri + "/login");
 		return false;

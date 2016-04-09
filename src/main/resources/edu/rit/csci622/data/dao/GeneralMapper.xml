@@ -65,7 +65,7 @@
 	</select>
 	
 	<select id="getUserFromSession" resultType="Map" statementType="CALLABLE">
-		{call getUserFromSession(#{uuid},#{key})
+		{call getUserFromSession(#{uuid},#{key})}
 	</select>
 
 

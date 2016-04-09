@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class User {
 
-	private int idUser, role;
+	private int idUser, role = 0;
 	private String username,first_name,last_name,email,password, joinedOn;
 	
 	public int getIdUser() {
