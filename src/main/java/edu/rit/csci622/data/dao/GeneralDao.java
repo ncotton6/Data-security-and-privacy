@@ -28,5 +28,7 @@ public interface GeneralDao {
 	public void deleteSession(@Param("sessionId") int sessionId);
 
 	public Map<String, String> getUserPassword(@Param("username") String username, @Param("key") String key);
+	
+	public Map<String,String> getUserFromSession(@Param("uuid") String uuid, @Param("key") String key); 
 
 }

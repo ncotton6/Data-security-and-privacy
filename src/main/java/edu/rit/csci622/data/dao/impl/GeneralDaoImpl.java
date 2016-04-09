@@ -23,8 +23,8 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 
 	private final String resource = "edu/rit/csci622/data/dao/GeneralConfig.xml";
 	private SqlSessionFactory factory;
-	
-	public GeneralDaoImpl() throws IOException{
+
+	public GeneralDaoImpl() throws IOException {
 		InputStream is = Resources.getResourceAsStream(resource);
 		this.factory = new SqlSessionFactoryBuilder().build(is);
 		is.close();
@@ -33,117 +33,132 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
-		try{
-			User encryptedUser = (User)encrypt(User.class, user);
+		try {
+			User encryptedUser = (User) encrypt(User.class, user);
+			System.out.println(encryptedUser.getFirst_name() + " " + encryptedUser.getLast_name() + " "
+					+ encryptedUser.getPassword() + " :: " + encryptedUser.getUsername());
 			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public User getUser(int userId, String key) {
 		SqlSession session = factory.openSession();
-		try{
+		try {
 			User user = session.getMapper(GeneralDao.class).getUser(userId, key);
-			user = (User)decrypt(User.class, user);
+			user = (User) decrypt(User.class, user);
 			session.commit();
 			return user;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public void createSession(String uuid, int userId, String key) {
 		SqlSession session = factory.openSession();
-		try{
+		try {
 			session.getMapper(GeneralDao.class).createSession(encrypt(uuid), userId, key);
 			session.commit();
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public List<Product> getProduct(int productId, String key) {
 		SqlSession session = factory.openSession();
-		try{			
+		try {
 			List<Product> products = session.getMapper(GeneralDao.class).getProduct(productId, key);
 			List<Product> ret = new ArrayList<Product>(products.size());
-			for(Product p : products){
-				ret.add((Product)decrypt(Product.class, p));
+			for (Product p : products) {
+				ret.add((Product) decrypt(Product.class, p));
 			}
 			session.commit();
 			return ret;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public int placeOrder(int productId, int quantity, int userId, String key) {
 		SqlSession session = factory.openSession();
-		try{
+		try {
 			int orderId = session.getMapper(GeneralDao.class).placeOrder(productId, quantity, userId, key);
 			session.commit();
 			return orderId;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public List<Product> getProducts(String key) {
 		SqlSession session = factory.openSession();
-		try{
+		try {
 			List<Product> products = session.getMapper(GeneralDao.class).getProducts(key);
 			List<Product> ret = new ArrayList<Product>(products.size());
-			for(Product p : products){
-				ret.add((Product)decrypt(Product.class, p));
+			for (Product p : products) {
+				ret.add((Product) decrypt(Product.class, p));
 			}
 			return ret;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public int requestHire(int userId, int roleId) {
 		SqlSession session = factory.openSession();
-		try{
+		try {
 			int requestId = session.getMapper(GeneralDao.class).requestHire(userId, roleId);
 			session.commit();
 			return requestId;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public void deleteSession(int sessionId) {
 		SqlSession session = factory.openSession();
-		try{
-			session.getMapper(GeneralDao.class).deleteSession(sessionId);;
+		try {
+			session.getMapper(GeneralDao.class).deleteSession(sessionId);
+			;
 			session.commit();
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
 
 	public Map<String, String> getUserPassword(String username, String key) {
 		SqlSession session = factory.openSession();
-		try{
-			Map<String,String> map = session.getMapper(GeneralDao.class).getUserPassword(username, key);
+		try {
+			Map<String, String> map = session.getMapper(GeneralDao.class).getUserPassword(username, key);
 			session.commit();
 			return map;
-		}finally{
-			if(session != null)
+		} finally {
+			if (session != null)
 				session.close();
 		}
 	}
-	
+
+	public Map<String, String> getUserFromSession(String uuid, String key) {
+		SqlSession session = factory.openSession();
+		try {
+			Map<String, String> map = session.getMapper(GeneralDao.class).getUserFromSession(uuid, key);
+			session.commit();
+			return map;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 }

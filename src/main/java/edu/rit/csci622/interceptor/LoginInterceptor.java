@@ -2,6 +2,7 @@ package edu.rit.csci622.interceptor;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import edu.rit.csci622.auth.Auth;
 import edu.rit.csci622.auth.Role;
 import edu.rit.csci622.controller.LoginInController;
+import edu.rit.csci622.controller.UserController;
+import edu.rit.csci622.data.PasswordHandler;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 
@@ -36,7 +39,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (handler instanceof HandlerMethod)
 			hm = (HandlerMethod) handler;
 		Method m = hm.getMethod();
-		if(m.getDeclaringClass() == LoginInController.class)
+		if (m.getDeclaringClass() == LoginInController.class
+				|| (m.getDeclaringClass() == UserController.class && m.getName().equals("createUser")))
 			return true;
 		Auth auth = m.getDeclaringClass().getAnnotation(Auth.class);
 		if (auth != null) {
@@ -45,14 +49,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (cookies != null)
 			for (Cookie c : cookies) {
 				if ("ecommsession".equals(c.getName())) {
-					// add the cookie check
-					// if fail redirect
-					// get annotation off of the handler
+					GeneralDao dao = new GeneralDaoImpl();
+					Map<String, String> map = dao.getUserFromSession(c.getValue(), PasswordHandler.getDbPassword());
+					String userId = map.get("userId");
+					System.out.println(userId + " --- -- - - - -");
+					// test user id
 					return true;
 				}
 			}
 		String uri = request.getContextPath();
-		response.sendRedirect(uri+"/login");
+		response.sendRedirect(uri + "/login");
 		return false;
 	}
 
