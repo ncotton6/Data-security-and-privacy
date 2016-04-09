@@ -178,4 +178,15 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		}
 	}
 
+	public void changePassword(int idUser, String password, String key) {
+		SqlSession session = factory.openSession();
+		try {
+			session.getMapper(GeneralDao.class).changePassword(idUser, password, key);
+			session.commit();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
 }

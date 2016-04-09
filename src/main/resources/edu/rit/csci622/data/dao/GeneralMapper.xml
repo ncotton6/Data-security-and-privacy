@@ -72,6 +72,8 @@
 		{call updateUser(#{uid},#{first_name},#{last_name},#{email},#{key})}
 	</select>
 
-
+	<select id="changePassword" statementType="CALLABLE">
+		{call changePassword(#{uID},#{password},#{key})}
+	</select>
 
 </mapper>

@@ -34,4 +34,6 @@ public interface GeneralDao {
 	public void updateUser(@Param("uid") int uid, @Param("first_name") String firstName,
 			@Param("last_name") String lastName, @Param("email") String email, @Param("key") String key);
 
+	public void changePassword(@Param("uID")int idUser, @Param("password")String password, @Param("key")String key);
+
 }

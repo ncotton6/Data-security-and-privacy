@@ -62,6 +62,15 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		dao.requestHire(u.getIdUser(), roleId);
 		return "redirect:/user";
 	}
+	
+	@Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
+	@RequestMapping(value = "/password", method = RequestMethod.POST)
+	public String changePassword(String password) throws IOException{
+		User u = getUser(request);
+		GeneralDao dao = new GeneralDaoImpl();
+		dao.changePassword(u.getIdUser(),password,PasswordHandler.getDbPassword());
+		return "redirect:/user";
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createUser(String username, String firstName, String lastName, String email, String password)
