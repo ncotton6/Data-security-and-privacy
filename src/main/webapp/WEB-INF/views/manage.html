@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Manage | eCommerce</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/main.css}"></link>
+</head>
+<body>
+	<div>
+		<h1>Create Product</h1>
+		<form action="#" th:action="@{/manage/createproduct}"
+			th:object="${product}" method="post">
+			<input type="text" placeholder="Name" th:name="name" />
+			<input type="text" placeholder="Description" th:name="description"/> 
+			<input type="number" placeholder="Price" name="amount" />
+			<button type="submit">Create</button>
+		</form>
+	</div>
+	<div>
+		<h1>Products</h1>
+		<div th:each="prod : ${products}">
+			<form action="#" th:action="@{/manage/updateproduct}" method="post">
+			    <input type="hidden" name="idProduct" th:value="${prod.idProduct}"/>
+				<input type="text" placeholder="Name" name="name" th:value="${prod.name}"/> 
+				<input type="text" placeholder="Description" name="description" th:value="${prod.description}"/>
+				<button type="submit">Update</button>
+			</form>
+			<form action="#" th:action="@{/manage/changeprice}" method="post">
+				<input type="hidden" name="prodId" th:value="${prod.idProduct}"/>
+				<input type="number" placeholder="Price" name="price" th:value="${prod.amount}" />
+				<button type="submit">Change Price</button>
+			</form>
+			<form action="#" th:action="@{/manage/flipprod}" method="post">
+				<input type="hidden" name="prodId" th:value="${prod.idProduct}"/>
+				
+				<button th:if="${prod.active}" type="submit">Deactivate</button>
+				<button th:unless="${prod.active}" type="submit">Activate</button>
+				
+			</form>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+</body>
+</html>

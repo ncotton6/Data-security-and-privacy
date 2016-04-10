@@ -35,9 +35,10 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public int createUser(User user, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			User encryptedUser = (User) encrypt(User.class, user);
-			System.out.println(encryptedUser.getFirst_name() + " " + encryptedUser.getLast_name() + " "
-					+ encryptedUser.getPassword() + " :: " + encryptedUser.getUsername());
+			user.setFirst_name(encrypt(user.getFirst_name()));
+			user.setLast_name(encrypt(user.getLast_name()));
+			user.setEmail(encrypt(user.getEmail()));
+			user.setPassword(passwordEncryptor.encryptPassword(user.getPassword()));
 			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
@@ -51,7 +52,9 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		SqlSession session = factory.openSession();
 		try {
 			User user = session.getMapper(GeneralDao.class).getUser(userId, key);
-			user = (User) decrypt(User.class, user);
+			user.setFirst_name(decrypt(user.getFirst_name()));
+			user.setLast_name(decrypt(user.getLast_name()));
+			user.setEmail(decrypt(user.getEmail()));
 			session.commit();
 			return user;
 		} finally {
@@ -77,7 +80,9 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 			List<Product> products = session.getMapper(GeneralDao.class).getProduct(productId, key);
 			List<Product> ret = new ArrayList<Product>(products.size());
 			for (Product p : products) {
-				ret.add((Product) decrypt(Product.class, p));
+				p.setName(decrypt(p.getName()));
+				p.setDescription(decrypt(p.getDescription()));
+				ret.add(p);
 			}
 			session.commit();
 			return ret;
@@ -105,9 +110,10 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 			List<Product> products = session.getMapper(GeneralDao.class).getProducts(key);
 			List<Product> ret = new ArrayList<Product>(products.size());
 			for (Product p : products) {
-				ret.add((Product) decrypt(Product.class, p));
+				p.setName(decrypt(p.getName()));
+				p.setDescription(decrypt(p.getDescription()));
 			}
-			return ret;
+			return products;
 		} finally {
 			if (session != null)
 				session.close();
@@ -130,7 +136,6 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		SqlSession session = factory.openSession();
 		try {
 			session.getMapper(GeneralDao.class).deleteSession(sessionId);
-			;
 			session.commit();
 		} finally {
 			if (session != null)
@@ -141,10 +146,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public Map<String, Object> getUserPassword(String username, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			System.out.println("Searching for: " + username + " with key: " + key);
 			Map<String, Object> map = session.getMapper(GeneralDao.class).getUserPassword(username, key);
-			System.out.println("Key Values");
-			System.out.println(map.get("idUser"));
 			map.put("username", new String((byte[]) map.get("username")));
 			map.put("password", new String((byte[]) map.get("password")));
 			session.commit();
@@ -170,7 +172,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public void updateUser(int uid, String firstName, String lastName, String email, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			session.getMapper(GeneralDao.class).updateUser(uid, firstName, lastName, email, key);
+			session.getMapper(GeneralDao.class).updateUser(uid, encrypt(firstName), encrypt(lastName), encrypt(email), key);
 			session.commit();
 		} finally {
 			if (session != null)
@@ -181,7 +183,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 	public void changePassword(int idUser, String password, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			session.getMapper(GeneralDao.class).changePassword(idUser, password, key);
+			session.getMapper(GeneralDao.class).changePassword(idUser, passwordEncryptor.encryptPassword(password), key);
 			session.commit();
 		} finally {
 			if (session != null)

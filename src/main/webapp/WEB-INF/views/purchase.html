@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Dash | eCommerce</title>
+<link rel="stylesheet" type="text/css" th:href="@{resources/css/main.css}"></link>
+</head>
+<body>
+	<h1>Products</h1>
+	<div th:each="prod : ${products}">
+		<div>Name: <span th:text="${prod.name}"></span></div>
+		<div>Description: <span th:text="${prod.description}"></span></div>
+		<form action="#" th:action="@{/dash/order}" method="post">
+			<input type="hidden" name="product" th:value="${prod.idProduct}"/>
+			<input type="number" name="qty" placeholder="0" />
+			<button type="submit">Order</button>
+		</form>
+	</div>
+<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+</body>
+</html>

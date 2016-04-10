@@ -30,14 +30,20 @@
 		<result property="requestedRole" column="requestedRole"/>
 	</resultMap>
 	
-	<resultMap type="" id=""></resultMap>
-	
 	<select id="getHire" resultType="Hire" statementType="CALLABLE">
 		{call getHire()}
 	</select>
 	
 	<select id="managerHireSignOff" statementType="CALLABLE">
 		{call managerHireSignOff(#{userId},#{managerId},#{roleId})}
+	</select>
+	
+	<select id="getUsers" resultType="User" statementType="CALLABLE">
+		{call getUsers(#{key})}
+	</select>
+	
+	<select id="fireEmployee" statementType="CALLABLE">
+		{call fireEmployee(#{userId})}
 	</select>
 
 </mapper>

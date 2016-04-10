@@ -44,4 +44,10 @@ public class Hire {
 		this.idHire = idHire;
 	}
 
+	@Override
+	public String toString() {
+		return "Hire [idHire=" + idHire + ", idUser=" + idUser + ", requestedRole=" + requestedRole
+				+ ", managerSignOff=" + managerSignOff + ", hrSignOff=" + hrSignOff + "]";
+	}
+
 }

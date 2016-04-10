@@ -13,8 +13,9 @@ import edu.rit.csci622.data.PasswordHandler;
 import edu.rit.csci622.data.dao.EmployeeHandlerDao;
 import edu.rit.csci622.data.dao.ProductHandlerDao;
 import edu.rit.csci622.model.Hire;
+import edu.rit.csci622.model.User;
 
-public class ManagerDaoImpl extends EmployeerDaoImpl implements ProductHandlerDao, EmployeeHandlerDao {
+public class ManagerDaoImpl extends EmployeeDaoImpl implements ProductHandlerDao, EmployeeHandlerDao {
 
 	private final String resource = "edu/rit/csci622/data/dao/ManagerConfig.xml";
 	private SqlSessionFactory factory;
@@ -89,6 +90,18 @@ public class ManagerDaoImpl extends EmployeerDaoImpl implements ProductHandlerDa
 		try{
 			session.getMapper(ProductHandlerDao.class).updateProduct(productId, encrypt(name), encrypt(description), active, PasswordHandler.getDbPassword());
 			session.commit();
+		}finally{
+			if(session != null)
+				session.close();
+		}
+	}
+
+	public List<User> getUsers(String key) {
+		SqlSession session = factory.openSession();
+		try{
+			List<User> users = session.getMapper(EmployeeHandlerDao.class).getUsers(PasswordHandler.getDbPassword());
+			session.commit();
+			return users;
 		}finally{
 			if(session != null)
 				session.close();

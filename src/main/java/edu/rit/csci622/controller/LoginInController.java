@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 @Auth
 public class LoginInController {
 
+	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model modal) {
 		return "login";
@@ -29,14 +32,12 @@ public class LoginInController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(String username, String password, HttpServletResponse response) throws IOException {
-		System.out.println("Username: " + username);
-		System.out.println("Password: " + password);
 		GeneralDao dao = new GeneralDaoImpl();
 		Map<String, Object> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
 		if (user != null) {
-			Object dbPassword = user.get("password");
-			int userId = (Integer)user.get("idUser");
-			if (dbPassword.equals(password)) {
+			String dbPassword = (String) user.get("password");
+			int userId = (Integer) user.get("idUser");
+			if (passwordEncryptor.checkPassword(password, dbPassword)) {
 				UUID uuid = UUID.randomUUID();
 				dao.createSession(uuid.toString(), userId, PasswordHandler.getDbPassword());
 				Cookie c = new Cookie("ecommsession", uuid.toString());
