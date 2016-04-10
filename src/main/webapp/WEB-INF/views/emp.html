@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Orders | eCommerce</title>
+<link rel="stylesheet" type="text/css" th:href="@{resources/css/main.css}"></link>
+</head>
+<body>
+	<h1>Orders eCommerce</h1>
+	<div th:each="ord : ${orders}">
+		<div>Order #<span th:text="${ord.idOrder}"></span></div>
+		<form action="#" th:action="@{/emp}" method="post">
+			<input type="hidden" name="orderId" th:value="${ord.idOrder}"/>
+			<button type="submit">Fulfill</button>
+		</form>
+	</div>
+<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+</body>
+</html>

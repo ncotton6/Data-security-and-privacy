@@ -15,7 +15,7 @@ import edu.rit.csci622.data.dao.ProductHandlerDao;
 import edu.rit.csci622.model.Hire;
 import edu.rit.csci622.model.User;
 
-public class ManagerDaoImpl extends EmployeerDaoImpl implements ProductHandlerDao, EmployeeHandlerDao {
+public class ManagerDaoImpl extends EmployeeDaoImpl implements ProductHandlerDao, EmployeeHandlerDao {
 
 	private final String resource = "edu/rit/csci622/data/dao/ManagerConfig.xml";
 	private SqlSessionFactory factory;

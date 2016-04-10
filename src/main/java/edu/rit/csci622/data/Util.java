@@ -68,4 +68,14 @@ public class Util {
 		return hire;
 	}
 
+	public static List<Product> filterActive(List<Product> products) {
+		Iterator<Product> it = products.iterator();
+		while (it.hasNext()) {
+			Product h = it.next();
+			if (!h.isActive())
+				it.remove();
+		}
+		return products;
+	}
+
 }
