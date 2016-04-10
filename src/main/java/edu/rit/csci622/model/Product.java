@@ -7,7 +7,7 @@ public class Product {
 	private int idProduct, amount;
 	private String name, description;
 	private boolean active;
-	private Object date;
+	private Date date;
 
 	public int getIdProduct() {
 		return idProduct;
@@ -55,11 +55,11 @@ public class Product {
 				+ description + ", active=" + active + ", date=" + date + "]";
 	}
 
-	public Object getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Object date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

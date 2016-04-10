@@ -24,7 +24,7 @@ public class Util {
 		for (Entry<Integer, Product> p : tree.entrySet()) {
 			ret.add(p.getValue());
 		}
-		return ret;
+		return products;
 	}
 
 }

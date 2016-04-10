@@ -32,7 +32,7 @@
 				<button type="submit">Change Price</button>
 			</form>
 			<form action="#" th:action="@{/manage/flipprod}" method="post">
-				<input type="hidden" name="prodId"/>
+				<input type="hidden" name="prodId" th:value="${prod.idProduct}"/>
 				
 				<button th:if="${prod.active}" type="submit">Deactivate</button>
 				<button th:unless="${prod.active}" type="submit">Activate</button>

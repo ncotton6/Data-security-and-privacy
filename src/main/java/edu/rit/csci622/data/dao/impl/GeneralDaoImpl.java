@@ -75,7 +75,9 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 			List<Product> products = session.getMapper(GeneralDao.class).getProduct(productId, key);
 			List<Product> ret = new ArrayList<Product>(products.size());
 			for (Product p : products) {
-				ret.add((Product) decrypt(Product.class, p));
+				p.setName(decrypt(p.getName()));
+				p.setDescription(decrypt(p.getDescription()));
+				ret.add(p);
 			}
 			session.commit();
 			return ret;

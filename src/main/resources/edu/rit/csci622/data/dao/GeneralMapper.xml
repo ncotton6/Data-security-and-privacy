@@ -21,7 +21,7 @@
 		<result property="description" column="description"/>
 		<result property="active" column="active"/>
 		<result property="amount" column="amount"/>
-		<result property="date" column="date"/>
+		<result property="date" column="date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
 	</resultMap>
 
 	<select id="createUser" resultType="int" statementType="CALLABLE">
