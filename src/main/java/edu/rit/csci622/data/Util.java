@@ -57,4 +57,15 @@ public class Util {
 		return users;
 	}
 
+	public static List<Hire> filterHRSignoff(List<Hire> hire) {
+		Iterator<Hire> it = hire.iterator();
+		while (it.hasNext()) {
+			Hire h = it.next();
+			System.out.println(h);
+			if (h.getHrSignOff() != 0)
+				it.remove();
+		}
+		return hire;
+	}
+
 }

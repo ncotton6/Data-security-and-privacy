@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>HR : eCommerce</title>
+<link rel="stylesheet" type="text/css" th:href="@{resources/css/main.css}"></link>
+</head>
+<body>
+	
+
+<div>
+		<h1>Manager Requests</h1>
+		<div th:each="user : ${managerRequest}">
+			<div>
+				<div>
+					<span th:text="${user.first_name}"></span>&nbsp;<span th:text="${user.last_name}"></span>
+				</div>
+				<div>
+					<form action="#" th:action="@{/hr}" method="post">
+						<input type="hidden" name="userId" th:value="${user.idUser}"/>
+						<input type="hidden" name="roleId" value="1"/>
+						<button type="submit">Hire</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<h1>HR Requests</h1>
+		<div th:each="user : ${hrRequest}">
+			<div>
+				<div>
+					<span th:text="${user.first_name}"></span>&nbsp;<span th:text="${user.last_name}"></span>
+				</div>
+				<div>
+					<form action="#" th:action="@{/hr}" method="post">
+						<input type="hidden" name="userId" th:value="${user.idUser}"/>
+						<input type="hidden" name="roleId" value="2"/>
+						<button type="submit">Hire</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<h1>Employee Requests</h1>
+		<div th:each="user : ${employeeRequest}">
+			<div>
+				<div>
+					<span th:text="${user.first_name}"></span>&nbsp;<span th:text="${user.last_name}"></span>
+				</div>
+				<div>
+					<form action="#" th:action="@{/hr}" method="post">
+						<input type="hidden" name="userId" th:value="${user.idUser}"/>
+						<input type="hidden" name="roleId" value="3"/>
+						<button type="submit">Hire</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+</body>
+</html>

@@ -21,7 +21,7 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
 				<property name="url" value="jdbc:mysql://localhost:3306/mydb?noAccessToProcedureBodies=true&amp;useSSL=false" /> <!--  -->
-				<property name="username" value="hr" />
+				<property name="username" value="HR" />
 				<property name="password" value="hr" />
 			</dataSource>
 		</environment>
