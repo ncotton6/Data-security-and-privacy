@@ -36,8 +36,6 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		SqlSession session = factory.openSession();
 		try {
 			User encryptedUser = (User) encrypt(User.class, user);
-			System.out.println(encryptedUser.getFirst_name() + " " + encryptedUser.getLast_name() + " "
-					+ encryptedUser.getPassword() + " :: " + encryptedUser.getUsername());
 			int id = session.getMapper(GeneralDao.class).createUser(user, key);
 			session.commit();
 			return id;
@@ -105,7 +103,13 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 			List<Product> products = session.getMapper(GeneralDao.class).getProducts(key);
 			List<Product> ret = new ArrayList<Product>(products.size());
 			for (Product p : products) {
-				ret.add((Product) decrypt(Product.class, p));
+				Product temp = new Product();
+				temp.setActive(p.isActive());
+				temp.setIdProduct(p.getIdProduct());
+				temp.setName(decrypt(p.getName()));
+				temp.setDescription(decrypt(p.getDescription()));
+				temp.setAmount(p.getAmount());
+				ret.add(temp);
 			}
 			return ret;
 		} finally {

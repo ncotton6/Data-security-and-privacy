@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.rit.csci622.auth.Auth;
 import edu.rit.csci622.auth.Role;
 import edu.rit.csci622.data.PasswordHandler;
+import edu.rit.csci622.data.Util;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.data.dao.impl.ManagerDaoImpl;
@@ -21,7 +22,7 @@ import edu.rit.csci622.model.User;
 
 @org.springframework.stereotype.Controller
 @Auth(roles = { Role.MANAGER })
-@RequestMapping("/manager")
+@RequestMapping("/manage")
 public class ManagerController extends Controller {
 
 	@Autowired
@@ -31,15 +32,17 @@ public class ManagerController extends Controller {
 	public String index(Model model) throws IOException {
 		GeneralDao dao = new GeneralDaoImpl();
 		List<Product> products = dao.getProducts(PasswordHandler.getDbPassword());
-		model.addAttribute("products", products);
+
+		model.addAttribute("products", Util.filterProductsForNow(products));
+		model.addAttribute("product", new Product());
 		return "manage";
 	}
 
 	@RequestMapping(value = "/createproduct", method = RequestMethod.POST)
-	public String createProduct(Product product, int price) throws IOException {
-		if (price > 0) {
+	public String createProduct(Product product) throws IOException {
+		if (product.getAmount() > 0) {
 			ManagerDaoImpl mdi = new ManagerDaoImpl();
-			mdi.createProduct(product.getName(), product.getDescription(), product.isActive(), price,
+			mdi.createProduct(product.getName(), product.getDescription(), product.isActive(), product.getAmount(),
 					getUser(request).getIdUser(), PasswordHandler.getDbPassword());
 		}
 		return "redirect:/manage";

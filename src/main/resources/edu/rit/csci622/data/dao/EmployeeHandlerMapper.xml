@@ -30,8 +30,6 @@
 		<result property="requestedRole" column="requestedRole"/>
 	</resultMap>
 	
-	<resultMap type="" id=""></resultMap>
-	
 	<select id="getHire" resultType="Hire" statementType="CALLABLE">
 		{call getHire()}
 	</select>
