@@ -27,4 +27,8 @@ public class Util {
 		return products;
 	}
 
+	public static Product getMostRecent(List<Product> product) {
+		return product.get(0);
+	}
+
 }

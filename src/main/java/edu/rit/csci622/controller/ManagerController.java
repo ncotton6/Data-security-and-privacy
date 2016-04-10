@@ -68,6 +68,15 @@ public class ManagerController extends Controller {
 		return "redirect:/manage";
 	}
 
+	@RequestMapping(value = "/updateproduct", method = RequestMethod.POST)
+	public String updateProduct(Product prod) throws IOException {
+		ManagerDaoImpl dao = new ManagerDaoImpl();
+		Product p = Util.getMostRecent(dao.getProduct(prod.getIdProduct(), PasswordHandler.getDbPassword()));
+		dao.updateProduct(p.getIdProduct(), prod.getName(), prod.getDescription(), p.isActive(),
+				PasswordHandler.getDbPassword());
+		return "redirect:/manage";
+	}
+
 	public HttpServletRequest getRequest() {
 		return request;
 	}
