@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import edu.rit.csci622.auth.Auth;
 import edu.rit.csci622.auth.Role;
 import edu.rit.csci622.data.PasswordHandler;
+import edu.rit.csci622.data.Util;
 import edu.rit.csci622.data.dao.impl.HrDaoImpl;
 import edu.rit.csci622.model.Hire;
 import edu.rit.csci622.model.User;
