@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Fire | eCommerce</title>
+<link rel="stylesheet" type="text/css"
+	th:href="@{resources/css/main.css}"></link>
+</head>
+<body>
+	<h1>Fire</h1>
+	<div th:each="u : ${emp}">
+		<span th:text="${u.first_name}"></span>&nbsp;<span
+			th:text="${u.last_name}"></span>
+		<form action="#" th:action="@{/manage/fire}" method="post">
+			<input type="hidden" name="userId" th:value="${u.idUser}" />
+			<button type="submit">FIRE</button>
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{resources/js/script.js}"></script>
+</body>
+</html>

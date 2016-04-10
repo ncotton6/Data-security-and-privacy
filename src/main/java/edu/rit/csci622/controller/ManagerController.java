@@ -1,6 +1,9 @@
 package edu.rit.csci622.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ import edu.rit.csci622.data.Util;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.data.dao.impl.ManagerDaoImpl;
+import edu.rit.csci622.model.Hire;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
@@ -75,6 +79,54 @@ public class ManagerController extends Controller {
 		dao.updateProduct(p.getIdProduct(), prod.getName(), prod.getDescription(), p.isActive(),
 				PasswordHandler.getDbPassword());
 		return "redirect:/manage";
+	}
+
+	@RequestMapping(value = "/hire", method = RequestMethod.GET)
+	public String hire(Model model) throws IOException {
+		ManagerDaoImpl dao = new ManagerDaoImpl();
+		List<Hire> hireRequests = Util.filterManagerSignOff(dao.getHire());
+		HashMap<Integer, List<User>> requests = new HashMap<Integer, List<User>>();
+		requests.put(Role.MANAGER.roleId, new ArrayList<User>());
+		requests.put(Role.HR.roleId, new ArrayList<User>());
+		requests.put(Role.EMPLOYEE.roleId, new ArrayList<User>());
+		for (Hire h : hireRequests) {
+			if (requests.containsKey(h.getRequestedRole()))
+				requests.get(h.getRequestedRole()).add(dao.getUser(h.getIdUser(), PasswordHandler.getDbPassword()));
+		}
+		model.addAttribute("managerRequest", requests.get(Role.MANAGER.roleId));
+		model.addAttribute("hrRequest", requests.get(Role.HR.roleId));
+		model.addAttribute("employeeRequest", requests.get(Role.EMPLOYEE.roleId));
+		return "hire";
+	}
+
+	@RequestMapping(value = "/hire", method = RequestMethod.POST)
+	public String hire(int userId, int roleId) throws IOException {
+		ManagerDaoImpl dao = new ManagerDaoImpl();
+		User u = getUser(request);
+		dao.managerHireSignOff(userId, u.getIdUser(), roleId);
+		return "redirect:/manage/hire";
+	}
+
+	@RequestMapping(value = "/fire", method = RequestMethod.GET)
+	public String fire(Model model) throws IOException {
+		User u = getUser(request);
+		ManagerDaoImpl dao = new ManagerDaoImpl();
+		List<User> users = Util.filterForEmployees(dao.getUsers(PasswordHandler.getDbPassword()));
+		Iterator<User> it = users.iterator();
+		while (it.hasNext()) {
+			User t = it.next();
+			if (u.getIdUser() == t.getIdUser())
+				it.remove();
+		}
+		model.addAttribute("emp", users);
+		return "fire";
+	}
+
+	@RequestMapping(value = "/fire", method = RequestMethod.POST)
+	public String fire(int userId) throws IOException {
+		ManagerDaoImpl dao = new ManagerDaoImpl();
+		dao.fireEmployee(userId);
+		return "redirect:/manage/fire";
 	}
 
 	public HttpServletRequest getRequest() {
