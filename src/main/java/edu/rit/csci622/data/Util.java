@@ -16,7 +16,6 @@ public class Util {
 	public static List<Product> filterProductsForNow(List<Product> products) {
 		Hashtable<Integer, Product> tree = new Hashtable<Integer, Product>();
 		for (Product p : products) {
-			System.out.println(p);
 			/*
 			 * if (!tree.containsKey(p.getIdProduct()))
 			 * tree.put(p.getIdProduct(), p); else { if
@@ -39,7 +38,6 @@ public class Util {
 		Iterator<Hire> it = hire.iterator();
 		while (it.hasNext()) {
 			Hire h = it.next();
-			System.out.println(h);
 			if (h.getManagerSignOff() != 0)
 				it.remove();
 		}

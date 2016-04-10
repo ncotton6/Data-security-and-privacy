@@ -32,8 +32,6 @@ public class LoginInController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(String username, String password, HttpServletResponse response) throws IOException {
-		System.out.println("Username: " + username);
-		System.out.println("Password: " + password);
 		GeneralDao dao = new GeneralDaoImpl();
 		Map<String, Object> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
 		if (user != null) {
