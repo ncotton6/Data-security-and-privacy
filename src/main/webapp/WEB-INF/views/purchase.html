@@ -11,6 +11,7 @@
 	<div th:each="prod : ${products}">
 		<div>Name: <span th:text="${prod.name}"></span></div>
 		<div>Description: <span th:text="${prod.description}"></span></div>
+		<div>Price: <span th:text="${prod.amount}"></span></div>
 		<form action="#" th:action="@{/dash/order}" method="post">
 			<input type="hidden" name="product" th:value="${prod.idProduct}"/>
 			<input type="number" name="qty" placeholder="0" />

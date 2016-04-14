@@ -2,6 +2,7 @@ package edu.rit.csci622.data.dao.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -100,6 +101,13 @@ public class ManagerDaoImpl extends EmployeeDaoImpl implements ProductHandlerDao
 		SqlSession session = factory.openSession();
 		try{
 			List<User> users = session.getMapper(EmployeeHandlerDao.class).getUsers(PasswordHandler.getDbPassword());
+			Iterator<User> it = users.iterator();
+			while(it.hasNext()){
+				User u = it.next();
+				u.setFirst_name(decrypt(u.getFirst_name()));
+				u.setLast_name(decrypt(u.getLast_name()));
+				u.setEmail(decrypt(u.getEmail()));
+			}
 			session.commit();
 			return users;
 		}finally{
