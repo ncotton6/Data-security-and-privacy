@@ -5,9 +5,14 @@
 <title>Hire | eCommerce</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{resources/css/main.css}"></link>
+	<!-- Bootstrap Core CSS -->
+	<link th:href="@{resources/css/bootstrap.min.css}" rel="stylesheet"></link>
+
+	<!-- Custom CSS -->
+	<link th:href="@{resources/css/heroic-features.css}" rel="stylesheet"></link>
 </head>
 <body>
-
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:include="index :: nav"></nav>
 	<div>
 		<h1>Manager Requests</h1>
 		<div th:each="user : ${managerRequest}">
