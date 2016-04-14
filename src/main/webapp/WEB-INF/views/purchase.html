@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" th:href="@{resources/css/main.css}"></link>
 </head>
 <body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:include="index :: nav"></nav>
 	<h1>Products</h1>
 	<div th:each="prod : ${products}">
 		<div>Name: <span th:text="${prod.name}"></span></div>

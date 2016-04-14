@@ -8,7 +8,6 @@ public enum Role {
 	HR(2),
 	MANAGER(1);
 	
-	
 	public int roleId;
 
 	Role(int roleId){

@@ -26,7 +26,7 @@ public class LoginInController {
 	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model modal) {
+	public String index(Model model) {
 		return "login";
 	}
 
@@ -35,6 +35,7 @@ public class LoginInController {
 		GeneralDao dao = new GeneralDaoImpl();
 		Map<String, Object> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
 		if (user != null) {
+
 			String dbPassword = (String) user.get("password");
 			int userId = (Integer) user.get("idUser");
 			if (passwordEncryptor.checkPassword(password, dbPassword)) {

@@ -6,8 +6,15 @@ import java.util.Date;
 
 public class User {
 
-	private int idUser, role = 0;
-	private String username,first_name,last_name,email,password, joinedOn;
+	private int idUser;
+	private int role = 0;
+	private boolean loggedIn;
+	private String username;
+	private String first_name;
+	private String last_name;
+	private String email;
+	private String password;
+	private String joinedOn;
 	
 	public int getIdUser() {
 		return idUser;
@@ -54,7 +61,7 @@ public class User {
 	public String getJoinedOn() {
 		return joinedOn;
 	}
-	
+	public void setLoggedIn(){this.loggedIn = true;}
 	public Date getJoinedOnAsDate(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
