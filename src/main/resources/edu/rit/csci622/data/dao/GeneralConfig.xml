@@ -8,7 +8,9 @@
 		<typeAlias alias="User" type="edu.rit.csci622.model.User"/>
 		<typeAlias alias="Product" type="edu.rit.csci622.model.Product"/>
 	</typeAliases>
-	
+	<typeHandlers>
+		<typeHandler handler="edu.rit.csci622.data.dao.impl.DateTypeHandler"/>
+	</typeHandlers>
 
 	<environments default="development">
 		<environment id="development">

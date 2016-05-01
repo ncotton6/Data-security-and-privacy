@@ -112,6 +112,7 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 			for (Product p : products) {
 				p.setName(decrypt(p.getName()));
 				p.setDescription(decrypt(p.getDescription()));
+				System.out.println(p.getDate());
 			}
 			return products;
 		} finally {

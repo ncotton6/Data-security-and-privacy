@@ -16,18 +16,20 @@ public class Util {
 	public static List<Product> filterProductsForNow(List<Product> products) {
 		Hashtable<Integer, Product> tree = new Hashtable<Integer, Product>();
 		for (Product p : products) {
-			/*
-			 * if (!tree.containsKey(p.getIdProduct()))
-			 * tree.put(p.getIdProduct(), p); else { if
-			 * (tree.get(p.getIdProduct()).getDate().before(p.getDate()))
-			 * tree.put(p.getIdProduct(), p); }
-			 */
+			System.out.println(p.getIdProduct());
+			if (!tree.containsKey(p.getIdProduct()))
+				tree.put(p.getIdProduct(), p);
+			else {
+				if (tree.get(p.getIdProduct()).getDate().after(p.getDate()))
+					tree.put(p.getIdProduct(), p);
+			}
+
 		}
 		ArrayList<Product> ret = new ArrayList<Product>();
 		for (Entry<Integer, Product> p : tree.entrySet()) {
 			ret.add(p.getValue());
 		}
-		return products;
+		return ret;
 	}
 
 	public static Product getMostRecent(List<Product> product) {
