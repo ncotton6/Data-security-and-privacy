@@ -2,7 +2,9 @@ package edu.rit.csci622.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,13 +63,13 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		dao.requestHire(u.getIdUser(), roleId);
 		return "redirect:/user";
 	}
-	
+
 	@Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
 	@RequestMapping(value = "/password", method = RequestMethod.POST)
-	public String changePassword(String password) throws IOException{
+	public String changePassword(String password) throws IOException {
 		User u = getUser(request);
 		GeneralDao dao = new GeneralDaoImpl();
-		dao.changePassword(u.getIdUser(),password,PasswordHandler.getDbPassword());
+		dao.changePassword(u.getIdUser(), password, PasswordHandler.getDbPassword());
 		return "redirect:/user";
 	}
 
@@ -85,6 +87,14 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		return "redirect:/login";
 	}
 
+	@RequestMapping("/logout")
+	public String logout(HttpServletResponse response) {
+		Cookie cookie = new Cookie("ecommsession", "");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+		return "redirect:/login";
+	}
+
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -92,5 +102,4 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-
 }
