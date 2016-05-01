@@ -4,6 +4,8 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.ibatis.type.BaseTypeHandler;
@@ -13,8 +15,14 @@ public class DateTypeHandler extends BaseTypeHandler<Date> {
 
 	@Override
 	public Date getNullableResult(ResultSet arg0, String arg1) throws SQLException {
-		System.out.println("3");
-		return arg0.getDate(arg1);
+		String date = arg0.getString(arg1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		try {
+			return sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

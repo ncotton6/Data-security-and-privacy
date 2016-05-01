@@ -20,7 +20,7 @@ public class Util {
 			if (!tree.containsKey(p.getIdProduct()))
 				tree.put(p.getIdProduct(), p);
 			else {
-				if (tree.get(p.getIdProduct()).getDate().after(p.getDate()))
+				if (tree.get(p.getIdProduct()).getDate().before(p.getDate()))
 					tree.put(p.getIdProduct(), p);
 			}
 
