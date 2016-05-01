@@ -82,7 +82,7 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		user.setLast_name(lastName);
 		user.setPassword(password);
 		int id = dao.createUser(user, PasswordHandler.getDbPassword());
-		return "redirect:/user";
+		return "redirect:/login";
 	}
 
 	public HttpServletRequest getRequest() {

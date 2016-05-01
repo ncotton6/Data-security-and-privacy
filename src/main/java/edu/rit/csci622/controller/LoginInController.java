@@ -33,18 +33,19 @@ public class LoginInController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(String username, String password, HttpServletResponse response) throws IOException {
 		GeneralDao dao = new GeneralDaoImpl();
-		Map<String, Object> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
-		if (user != null) {
-
-			String dbPassword = (String) user.get("password");
-			int userId = (Integer) user.get("idUser");
-			if (passwordEncryptor.checkPassword(password, dbPassword)) {
-				UUID uuid = UUID.randomUUID();
-				dao.createSession(uuid.toString(), userId, PasswordHandler.getDbPassword());
-				Cookie c = new Cookie("ecommsession", uuid.toString());
-				c.setMaxAge(3600); // login lasts for one hour
-				response.addCookie(c);
-				return "redirect:/";
+		if (username != null && password != null && !username.trim().isEmpty() && !password.trim().isEmpty()) {
+			Map<String, Object> user = dao.getUserPassword(username, PasswordHandler.getDbPassword());
+			if (user != null) {
+				String dbPassword = (String) user.get("password");
+				int userId = (Integer) user.get("idUser");
+				if (passwordEncryptor.checkPassword(password, dbPassword)) {
+					UUID uuid = UUID.randomUUID();
+					dao.createSession(uuid.toString(), userId, PasswordHandler.getDbPassword());
+					Cookie c = new Cookie("ecommsession", uuid.toString());
+					c.setMaxAge(3600); // login lasts for one hour
+					response.addCookie(c);
+					return "redirect:/";
+				}
 			}
 		}
 		return "redirect:/login";

@@ -82,6 +82,7 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.4</version>
 					<configuration>
+					    <outputDirectory>C:/tomcat/apache-tomcat-8.0.32/webapps</outputDirectory>
 						<warSourceDirectory>src/main/java</warSourceDirectory>
 						<warName>dataSecurityproj</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
