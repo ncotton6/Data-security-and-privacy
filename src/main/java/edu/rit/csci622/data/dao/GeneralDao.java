@@ -25,7 +25,7 @@ public interface GeneralDao {
 
 	public int requestHire(@Param("userId") int userId, @Param("roleId") int roleId);
 
-	public void deleteSession(@Param("sessionId") int sessionId);
+	public void deleteSession(@Param("uuid") String uuid, @Param("key") String key);
 
 	public Map<String, Object> getUserPassword(@Param("username") String username, @Param("key") String key);
 

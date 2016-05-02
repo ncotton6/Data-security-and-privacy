@@ -88,10 +88,9 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 	}
 
 	@RequestMapping("/logout")
-	public String logout(HttpServletResponse response) {
-		Cookie cookie = new Cookie("ecommsession", "");
-		cookie.setMaxAge(0);
-		response.addCookie(cookie);
+	public String logout() throws IOException {
+		GeneralDao dao = new GeneralDaoImpl();
+		dao.deleteSession(getSessionUUID(request), PasswordHandler.getDbPassword());
 		return "redirect:/login";
 	}
 

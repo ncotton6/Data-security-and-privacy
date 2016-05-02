@@ -133,10 +133,10 @@ public class GeneralDaoImpl extends Dao implements GeneralDao {
 		}
 	}
 
-	public void deleteSession(int sessionId) {
+	public void deleteSession(String uuid, String key) {
 		SqlSession session = factory.openSession();
 		try {
-			session.getMapper(GeneralDao.class).deleteSession(sessionId);
+			session.getMapper(GeneralDao.class).deleteSession(uuid, key);
 			session.commit();
 		} finally {
 			if (session != null)

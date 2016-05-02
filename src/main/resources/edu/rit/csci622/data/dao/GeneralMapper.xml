@@ -59,7 +59,7 @@
 	</select>
 
 	<select id="deleteSession" statementType="CALLABLE">
-		{call deleteSession(#{sessionId})}
+		{call deleteSession(#{uuid},#{key})}
 	</select>
 	
 	<select id="getUserPassword" resultType="Map" statementType="CALLABLE">
