@@ -76,14 +76,22 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createUser(String username, String firstName, String lastName, String email, String password)
 			throws IOException {
-		GeneralDao dao = new GeneralDaoImpl();
-		User user = new User();
-		user.setEmail(email);
-		user.setUsername(username);
-		user.setFirst_name(firstName);
-		user.setLast_name(lastName);
-		user.setPassword(password);
-		int id = dao.createUser(user, PasswordHandler.getDbPassword());
+		if (username != null && firstName != null && lastName != null && password != null && !username.trim().isEmpty()
+				&& !firstName.trim().isEmpty() && !lastName.trim().isEmpty() && !password.trim().isEmpty()) {
+			GeneralDao dao = new GeneralDaoImpl();
+			User user = new User();
+			user.setEmail(email);
+			user.setUsername(username);
+			user.setFirst_name(firstName);
+			user.setLast_name(lastName);
+			user.setPassword(password);
+			try {
+				int id = dao.createUser(user, PasswordHandler.getDbPassword());
+			} catch (Exception e) {
+				// could throw an exception if the user already exists
+				e.printStackTrace();
+			}
+		}
 		return "redirect:/login";
 	}
 
