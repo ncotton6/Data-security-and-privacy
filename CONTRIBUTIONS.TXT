@@ -21,4 +21,7 @@ code into something usable by Tomcat.
 
 Once the groundwork for the application was complete, Nathaniel 
 flushed out a number of major features that would be required for 
-usage of the application.
+usage of the application. However, he did very little in regards
+to the visual side of the application (HTML,CSS,etc.).
+
+Nathaniel did a fair amount of RLES setup along with Adam, and Tom.
