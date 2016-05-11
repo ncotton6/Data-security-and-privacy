@@ -1,0 +1,24 @@
+Adam Fowles:
+-------------------------------------------------------------------
+
+Tom Ansill:
+-------------------------------------------------------------------
+
+Nathaniel Cotton:
+-------------------------------------------------------------------
+Based off the work on the database put forth by Adam, Nathaniel 
+expanded upon it to add extra table to enable the overall application
+to have more functionality.  Additionally, Nathaniel added stored
+procedures and users to the database to added security.  However, 
+due to some oversights Nathaniel indroduced a few errors in the
+database that were later fixed by Adam, and him.
+
+Due to Nathaniel's prior experience with developing web applications
+he took it upon himself to lay the groundwork for the web portion of
+the application. He connected the application to the database through
+MyBatis, as well as setting up the Spring Framework for turning the
+code into something usable by Tomcat.
+
+Once the groundwork for the application was complete, Nathaniel 
+flushed out a number of major features that would be required for 
+usage of the application.
