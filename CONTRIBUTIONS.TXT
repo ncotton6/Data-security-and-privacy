@@ -16,7 +16,7 @@ Tom has helped Adam and Nathaniel on designing the architecture of
 application. Nathaniel, Adam, and Tom did some work on RLES setup. 
 Adam and Tom wrote the code for the visual side of the application 
 (HTML and CSS). Tom has written some of the necessary documentation 
-about the project and its usage. Tom ran a several attacks on the 
+about the project and its usage. Tom ran several attacks on the 
 application to test the security of the application. Tom also ran a 
 several attacks on other group projects as part of the project 
 assignment. Adam, Nathaniel, and Tom has written the major portions 
