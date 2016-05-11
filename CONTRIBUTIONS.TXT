@@ -1,5 +1,14 @@
 Adam Fowles:
 -------------------------------------------------------------------
+Adam worked with Nathaniel on designing the database. He worked
+mostly on the look and feel of the application writing and adding
+in the CSS and HTML components. Adam helped Nathaniel set up the
+RLES system along with Tom. He attacked both teams
+and wrote up half of the phase 4 submission along with Nathaniel.
+For each submission he helped write the report. Together with
+Nathaniel and Tom and he tested the system as a whole. For phase
+5 he put together the poster using what the team wrote up for the
+final report. 
 
 Tom Ansill:
 -------------------------------------------------------------------
