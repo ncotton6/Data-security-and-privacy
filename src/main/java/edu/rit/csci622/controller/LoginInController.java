@@ -18,6 +18,14 @@ import edu.rit.csci622.data.PasswordHandler;
 import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 
+/**
+ * In order to interact with the application a user must first go through this
+ * login module and receive the special session id. Which will be stored in a
+ * cookie.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @Controller
 @RequestMapping("/login")
 @Auth
@@ -25,11 +33,26 @@ public class LoginInController {
 
 	private BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
+	/**
+	 * Brings up the login page
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 		return "login";
 	}
 
+	/**
+	 * Allows a user to login
+	 * 
+	 * @param username
+	 * @param password
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String login(String username, String password, HttpServletResponse response) throws IOException {
 		GeneralDao dao = new GeneralDaoImpl();

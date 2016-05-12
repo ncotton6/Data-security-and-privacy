@@ -20,6 +20,12 @@ import edu.rit.csci622.data.dao.impl.HrDaoImpl;
 import edu.rit.csci622.model.Hire;
 import edu.rit.csci622.model.User;
 
+/**
+ * This class implements all the functionality needed by an HR representative.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @org.springframework.stereotype.Controller
 @Auth(roles = { Role.HR })
 @RequestMapping("/hr")
@@ -28,6 +34,14 @@ public class HRController extends Controller {
 	@Autowired
 	private HttpServletRequest request;
 
+	/**
+	 * The index page will bring up all of the users who have requested to be
+	 * hired, and have not already been signed off on by an HR representative.
+	 * 
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) throws IOException {
 		HrDaoImpl dao = new HrDaoImpl();
@@ -46,6 +60,14 @@ public class HRController extends Controller {
 		return "hr";
 	}
 
+	/**
+	 * Signs off on a request for hire
+	 * 
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String hire(int userId, int roleId) throws IOException {
 		HrDaoImpl dao = new HrDaoImpl();

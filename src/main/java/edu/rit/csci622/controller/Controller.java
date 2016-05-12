@@ -11,8 +11,21 @@ import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.User;
 
+/**
+ * Base controller that will supply functionality that would be desireable in
+ * all controllers.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class Controller {
 
+	/**
+	 * Gets a user object from the cookie stored in the request
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public User getUser(HttpServletRequest request) {
 
 		String value = getSessionUUID(request);
@@ -28,6 +41,12 @@ public class Controller {
 		throw new RuntimeException("Couldn't find user");
 	}
 
+	/**
+	 * Gets the cookie id from the request.
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public String getSessionUUID(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {

@@ -24,6 +24,12 @@ import edu.rit.csci622.model.Hire;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
+/**
+ * All manager based operation are implemented here.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @org.springframework.stereotype.Controller
 @Auth(roles = { Role.MANAGER })
 @RequestMapping("/manage")
@@ -32,6 +38,13 @@ public class ManagerController extends Controller {
 	@Autowired
 	private HttpServletRequest request;
 
+	/**
+	 * Shows all the products that are currently in the system, both active and inactive.
+	 * 
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) throws IOException {
 		GeneralDao dao = new GeneralDaoImpl();
@@ -42,6 +55,13 @@ public class ManagerController extends Controller {
 		return "manage";
 	}
 
+	/**
+	 * Allows for the creation of a product.
+	 * 
+	 * @param product
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/createproduct", method = RequestMethod.POST)
 	public String createProduct(Product product) throws IOException {
 		if (product.getAmount() > 0) {
@@ -52,6 +72,13 @@ public class ManagerController extends Controller {
 		return "redirect:/manage";
 	}
 
+	/**
+	 * Allows for a product to be activated or deactivated.
+	 * 
+	 * @param prodId
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/flipprod", method = RequestMethod.POST)
 	public String flipProd(int prodId) throws IOException {
 		ManagerDaoImpl mdi = new ManagerDaoImpl();
@@ -64,6 +91,14 @@ public class ManagerController extends Controller {
 		return "redirect:/manage";
 	}
 
+	/**
+	 * Allows for a products price to change
+	 * 
+	 * @param prodId
+	 * @param price
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/changeprice", method = RequestMethod.POST)
 	public String changePrice(int prodId, int price) throws IOException {
 		User u = getUser(request);
@@ -72,6 +107,13 @@ public class ManagerController extends Controller {
 		return "redirect:/manage";
 	}
 
+	/**
+	 * Allows for a products name and or description to be changed.
+	 * 
+	 * @param prod
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/updateproduct", method = RequestMethod.POST)
 	public String updateProduct(Product prod) throws IOException {
 		ManagerDaoImpl dao = new ManagerDaoImpl();
@@ -81,6 +123,14 @@ public class ManagerController extends Controller {
 		return "redirect:/manage";
 	}
 
+	/**
+	 * Allows for a manager to view hire requests if they haven't already been signed off on.
+	 * 
+	 * 
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/hire", method = RequestMethod.GET)
 	public String hire(Model model) throws IOException {
 		ManagerDaoImpl dao = new ManagerDaoImpl();
@@ -99,6 +149,14 @@ public class ManagerController extends Controller {
 		return "hire";
 	}
 
+	/**
+	 * Allows the manager to sign off on a hire.
+	 * 
+	 * @param userId
+	 * @param roleId
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/hire", method = RequestMethod.POST)
 	public String hire(int userId, int roleId) throws IOException {
 		ManagerDaoImpl dao = new ManagerDaoImpl();
@@ -107,6 +165,13 @@ public class ManagerController extends Controller {
 		return "redirect:/manage/hire";
 	}
 
+	/**
+	 * Brings up a page of all the employees that are firable.
+	 * 
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/fire", method = RequestMethod.GET)
 	public String fire(Model model) throws IOException {
 		User u = getUser(request);
@@ -122,6 +187,13 @@ public class ManagerController extends Controller {
 		return "fire";
 	}
 
+	/**
+	 * Allows the manager to fire any currently hired employee (HR,Manager,Employee).
+	 * 
+	 * @param userId
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/fire", method = RequestMethod.POST)
 	public String fire(int userId) throws IOException {
 		ManagerDaoImpl dao = new ManagerDaoImpl();

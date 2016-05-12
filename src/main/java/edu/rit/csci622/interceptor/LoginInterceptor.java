@@ -23,6 +23,15 @@ import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.User;
 
+/**
+ * The LoginInterceptor will take the cookie off an incoming request and look up
+ * a user in the database that is associated with the session. From their the
+ * role can be extracted, and tested against the annotation on the class or
+ * method to determine if the application should proceed.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 	private static final Logger logger = null;

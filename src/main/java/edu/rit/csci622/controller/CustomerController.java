@@ -20,6 +20,13 @@ import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
+/**
+ * This controller provides functionality for a user to purchase and look at
+ * products.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @RequestMapping("/dash")
 @Controller
 @Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
@@ -33,13 +40,27 @@ public class CustomerController extends edu.rit.csci622.controller.Controller {
 		dao = new GeneralDaoImpl();
 	}
 
+	/**
+	 * Directs the user to an index page where all the products will be shown.
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
-		List<Product> products = Util.filterActive(Util.filterProductsForNow(dao.getProducts(PasswordHandler.getDbPassword())));
+		List<Product> products = Util
+				.filterActive(Util.filterProductsForNow(dao.getProducts(PasswordHandler.getDbPassword())));
 		model.addAttribute("products", products);
 		return "purchase";
 	}
 
+	/**
+	 * Allows the user order a product.
+	 * 
+	 * @param qty
+	 * @param product
+	 * @return
+	 */
 	@RequestMapping(value = "/order", method = RequestMethod.POST)
 	public String order(int qty, int product) {
 		User u = getUser(request);

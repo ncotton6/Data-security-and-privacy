@@ -11,8 +11,20 @@ import edu.rit.csci622.model.Hire;
 import edu.rit.csci622.model.Product;
 import edu.rit.csci622.model.User;
 
+/**
+ * Useful cross-cutting functions
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class Util {
 
+	/**
+	 * Removes the older renditions of products.
+	 * 
+	 * @param products
+	 * @return
+	 */
 	public static List<Product> filterProductsForNow(List<Product> products) {
 		Hashtable<Integer, Product> tree = new Hashtable<Integer, Product>();
 		for (Product p : products) {
@@ -32,10 +44,22 @@ public class Util {
 		return ret;
 	}
 
+	/**
+	 * Gets the most recent product from a list.
+	 * 
+	 * @param product
+	 * @return
+	 */
 	public static Product getMostRecent(List<Product> product) {
 		return product.get(0);
 	}
 
+	/**
+	 * Filters through hire requests that a manager has already signed off on.
+	 * 
+	 * @param hire
+	 * @return
+	 */
 	public static List<Hire> filterManagerSignOff(List<Hire> hire) {
 		Iterator<Hire> it = hire.iterator();
 		while (it.hasNext()) {
@@ -46,6 +70,12 @@ public class Util {
 		return hire;
 	}
 
+	/**
+	 * Filters through all users searching for employees.
+	 * 
+	 * @param users
+	 * @return
+	 */
 	public static List<User> filterForEmployees(List<User> users) {
 		Iterator<User> it = users.iterator();
 		while (it.hasNext()) {
@@ -57,6 +87,12 @@ public class Util {
 		return users;
 	}
 
+	/**
+	 * Searches for hire requests that have not been signed off on.
+	 * 
+	 * @param hire
+	 * @return
+	 */
 	public static List<Hire> filterHRSignoff(List<Hire> hire) {
 		Iterator<Hire> it = hire.iterator();
 		while (it.hasNext()) {
@@ -68,6 +104,12 @@ public class Util {
 		return hire;
 	}
 
+	/**
+	 * Only returns the active products.
+	 * 
+	 * @param products
+	 * @return
+	 */
 	public static List<Product> filterActive(List<Product> products) {
 		Iterator<Product> it = products.iterator();
 		while (it.hasNext()) {

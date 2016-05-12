@@ -19,6 +19,12 @@ import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.User;
 
+/**
+ * All user based operations are located here.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @RequestMapping("/user")
 @Controller
 @Auth
@@ -27,6 +33,12 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 	@Autowired
 	private HttpServletRequest request;
 
+	/**
+	 * Brings up the user page, where user details are displayed.
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
@@ -40,6 +52,12 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		return "redirect:/login";
 	}
 
+	/**
+	 * Allows a user to update their details.
+	 * 
+	 * @param u
+	 * @return
+	 */
 	@Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
 	@RequestMapping(method = RequestMethod.POST)
 	public String updateUser(User u) {
@@ -55,6 +73,13 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		return "redirect:/login";
 	}
 
+	/**
+	 * Allows a user to request a hire.
+	 * 
+	 * @param roleId
+	 * @return
+	 * @throws IOException
+	 */
 	@Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
 	@RequestMapping(value = "/role", method = RequestMethod.POST)
 	public String requestRole(int roleId) throws IOException {
@@ -64,6 +89,13 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		return "redirect:/user";
 	}
 
+	/**
+	 * Allows the user to change their password.
+	 * 
+	 * @param password
+	 * @return
+	 * @throws IOException
+	 */
 	@Auth(roles = { Role.CUSTOMER, Role.EMPLOYEE, Role.HR, Role.MANAGER })
 	@RequestMapping(value = "/password", method = RequestMethod.POST)
 	public String changePassword(String password) throws IOException {
@@ -73,6 +105,17 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		return "redirect:/user";
 	}
 
+	/**
+	 * Allows for a new user to be created.
+	 * 
+	 * @param username
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param password
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createUser(String username, String firstName, String lastName, String email, String password)
 			throws IOException {
@@ -95,6 +138,12 @@ public class UserController extends edu.rit.csci622.controller.Controller {
 		return "redirect:/login";
 	}
 
+	/**
+	 * Allows a user to logout.
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/logout")
 	public String logout() throws IOException {
 		GeneralDao dao = new GeneralDaoImpl();

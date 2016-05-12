@@ -17,6 +17,12 @@ import edu.rit.csci622.data.dao.OrderHandlerDao;
 import edu.rit.csci622.data.dao.impl.EmployeeDaoImpl;
 import edu.rit.csci622.model.Order;
 
+/**
+ * This class implements all employee operations.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @Controller
 @Auth(roles = { Role.EMPLOYEE, Role.MANAGER })
 @RequestMapping("/emp")
@@ -25,6 +31,13 @@ public class EmployeeController extends edu.rit.csci622.controller.Controller {
 	@Autowired
 	private HttpServletRequest request;
 
+	/**
+	 * The index method will display all of the orders that have come in.
+	 * 
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) throws IOException {
 		OrderHandlerDao dao = new EmployeeDaoImpl();
@@ -33,6 +46,13 @@ public class EmployeeController extends edu.rit.csci622.controller.Controller {
 		return "emp";
 	}
 
+	/**
+	 * Allows the employee to fulfill an order.
+	 * 
+	 * @param orderId
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String fulFill(int orderId) throws IOException {
 		OrderHandlerDao dao = new EmployeeDaoImpl();

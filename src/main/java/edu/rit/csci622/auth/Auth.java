@@ -5,6 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This annotation will be used by the intercepter to determine if the
+ * underlying code should be executed.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 @Target(value={ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {

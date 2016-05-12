@@ -19,6 +19,12 @@ import edu.rit.csci622.data.dao.GeneralDao;
 import edu.rit.csci622.data.dao.impl.GeneralDaoImpl;
 import edu.rit.csci622.model.User;
 
+/**
+ * NOT FUNCTIONING AS PLANNED
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public class AuditInterceptor extends HandlerInterceptorAdapter {
 
 	final static Logger logger = LoggerFactory.getLogger(AuditInterceptor.class);

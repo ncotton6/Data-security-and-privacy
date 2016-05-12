@@ -1,5 +1,11 @@
 package edu.rit.csci622.auth;
 
+/**
+ * A class to represent a synchronization with the roles in the database.
+ * 
+ * @author Nathaniel Cotton
+ *
+ */
 public enum Role {
 
 	ANONYMOUS(-1),
